@@ -5,34 +5,49 @@
             <div class="lottery-price">1,000 원</div>
         </div>
         <div class="body">
-            <div v-for="(numbers, idx) in lottoNumbers" :key="idx" class="number-wrapper">
-                <span class="number">{{ numbers }}</span>
+            <div v-for="(lotto, idx) in lottoNumberList" :key="idx" class="body-container" @click="onCheck(idx)">
+                <div v-if="lotto.checked" class="isChecked" />
+                <div v-else class="checkbox-wrapper">
+                    <div class="checkbox">{{ lotto.number }}</div>
+                </div>
             </div>
         </div>
         <div class="footer">
             <div class="item select">
                 <div class="box-select">선택 완료</div>
-                <div class="number-wrapper">
-                    <span class="number"></span>
+                <div class="checkbox-wrapper">
+                    <span class="checkbox"></span>
                 </div>
             </div>
             <div class="item init">
                 <div class="box-init">초기화</div>
-                <div class="number-wrapper">
-                    <span class="number"></span>
+                <div class="checkbox-wrapper">
+                    <span class="checkbox"></span>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue'
-const lotteryClass = 'A' //TODO : props로 바꿀 예정
-const lottoNumbers = Array(45)
-    .fill(0)
-    .map((x, i) => i + 1)
+import { reactive } from 'vue'
 
-onMounted(() => {})
+const lotteryClass = 'A' //TODO : props로 바꿀 예정
+const lottoNumberList = reactive(
+    Array(45)
+        .fill({})
+        .map((x, i) => {
+            return { checked: false, number: i + 1 }
+        })
+)
+
+function onCheck(index: number) {
+    const isMaximum = !lottoNumberList[index].checked && lottoNumberList.filter((e) => e.checked).length >= 6
+    if (isMaximum) {
+        alert('6개 이상 체크 불가능')
+    } else {
+        lottoNumberList[index].checked = !lottoNumberList[index].checked
+    }
+}
 </script>
 <style lang="scss">
 .container {
@@ -83,13 +98,19 @@ onMounted(() => {})
             &.init {
                 margin-bottom: 6px;
             }
-            > .number-wrapper {
+            > .checkbox-wrapper {
                 margin-left: 6px;
                 margin-top: 0px;
             }
         }
     }
-    .number-wrapper {
+    .isChecked {
+        width: 15px;
+        height: 27px;
+        color: black;
+        background-color: black;
+    }
+    .checkbox-wrapper {
         position: relative;
         display: inline-block;
         width: 15px;
@@ -115,7 +136,7 @@ onMounted(() => {})
         &::after {
             right: -2px;
         }
-        .number {
+        .checkbox {
             margin: 0;
             position: absolute;
             top: 50%;
