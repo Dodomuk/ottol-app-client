@@ -1,10 +1,6 @@
 <template>
     <div class="lotto-papaer">
         <InputContainer />
-        <InputContainer />
-        <InputContainer />
-        <InputContainer />
-        <InputContainer />
     </div>
 </template>
 <script setup lang="ts">
