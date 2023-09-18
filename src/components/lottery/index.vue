@@ -1,6 +1,6 @@
 <template>
     <div class="lotto-container">
-        <ContentsLeft />
+        <ContentsHead />
         <div class="lotto-papaer">
             <!-- TODO: 마진 추후 공통(tailwind로 수정) -->
             <InputContainer class="margin" />
@@ -9,16 +9,20 @@
             <InputContainer class="margin" />
             <InputContainer />
         </div>
+        <ContentsBottom />
     </div>
 </template>
 <script setup lang="ts">
-import ContentsLeft from '@components/lottery/ContentsLeft.vue'
+import ContentsHead from '@components/lottery/ContentsHead.vue'
 import InputContainer from '@components/lottery/InputContainer.vue'
+import ContentsBottom from '@components/lottery/ContentsBottom.vue'
 </script>
-<style>
+<style lang="scss">
 .lotto-container {
     display: inline-flex;
     justify-content: center;
+    align-items: center;
+    margin-top: 42px;
     .lotto-papaer {
         display: flex;
         .margin {

@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
+        <div class="footer mt-24">
             <div class="item select">
                 <div class="box-select">선택 완료</div>
                 <div class="checkbox-wrapper" @click="onSubmit">
@@ -111,7 +111,6 @@ function onSubmit() {
     }
     .footer {
         padding-right: 3px;
-        margin-top: 100px;
         color: var(--main-color);
         float: right;
         > .item {
