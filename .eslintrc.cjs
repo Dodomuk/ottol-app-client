@@ -14,5 +14,9 @@ module.exports = {
                 ignores: ['index', 'Main'] // single-word 허용 파일
             }
         ]
+    },
+    env: {
+        node: true,
+        'vue/setup-compiler-macros': true // defineProps 자동 import
     }
 }

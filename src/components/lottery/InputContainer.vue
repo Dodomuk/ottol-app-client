@@ -5,7 +5,7 @@
             <div class="lottery-price">1,000 원</div>
         </div>
         <div :class="['body', isDisabled]">
-            <div v-for="(lotto, idx) in lottoNumberList" :key="idx" class="number-body" @click="onCheck(idx)">
+            <div v-for="(lotto, idx) in lottoNumberList" :key="idx" class="number-body mt-2.5" @click="onCheck(idx)">
                 <div v-if="lotto.checked" class="isChecked" />
                 <div v-else :class="['checkbox-wrapper', isDisabled]">
                     <div class="checkbox">{{ lotto.number }}</div>
@@ -13,15 +13,15 @@
             </div>
         </div>
         <div class="footer mt-24">
-            <div class="item select">
+            <div class="item mb-5">
                 <div class="box-select">선택 완료</div>
-                <div class="checkbox-wrapper" @click="onSubmit">
+                <div class="checkbox-wrapper mt-0 ml-1.5" @click="onSubmit">
                     <span class="checkbox"></span>
                 </div>
             </div>
-            <div class="item init">
+            <div class="item mb-1.5">
                 <div class="box-init">초기화</div>
-                <div class="checkbox-wrapper" @click="initialize">
+                <div class="checkbox-wrapper mt-0 ml-1.5" @click="initialize">
                     <span class="checkbox"></span>
                 </div>
             </div>
@@ -31,7 +31,13 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 
-const lotteryClass = 'A' //TODO : props로 바꿀 예정
+const props = defineProps({
+    section: String,
+    index: Number
+})
+const emit = defineEmits(['set-number'])
+
+const lotteryClass = props.section
 let isDisabled = ref('')
 const lottoNumberList = reactive(
     Array(45)
@@ -57,14 +63,31 @@ function initialize() {
     lottoNumberList.forEach((e) => {
         e.checked = false
     })
+    initializeEmitList()
+}
+
+// 화면 전체 선택 목록 초기화
+function initializeEmitList() {
+    emit('set-number', props.index)
 }
 
 //번호 선택 완료시 번호 클릭 버튼 비활성화
 function onSubmit() {
-    if (lottoNumberList.filter((e) => e.checked).length < 6) {
+    const checkedList = lottoNumberList.filter((e) => e.checked)
+    if (checkedList.length < 6) {
         alert('숫자를 6개 눌러주세요.')
     } else {
-        isDisabled.value = isDisabled.value ? '' : 'isDisabled'
+        if (isDisabled.value) {
+            isDisabled.value = ''
+            initializeEmitList()
+        } else {
+            isDisabled.value = 'isDisabled'
+            emit(
+                'set-number',
+                props.index,
+                checkedList.map((e) => e.number)
+            )
+        }
     }
 }
 </script>
@@ -117,16 +140,6 @@ function onSubmit() {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            &.select {
-                margin-bottom: 18px;
-            }
-            &.init {
-                margin-bottom: 6px;
-            }
-            > .checkbox-wrapper {
-                margin-left: 6px;
-                margin-top: 0px;
-            }
         }
     }
     .isChecked {
@@ -139,7 +152,6 @@ function onSubmit() {
         width: 15px;
         height: 27px;
         border: 1px solid var(--main-color);
-        margin-top: 10px;
         color: var(--main-color);
         font-size: 12px;
         font-weight: bold;

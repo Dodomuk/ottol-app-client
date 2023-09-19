@@ -6,12 +6,14 @@
 :root {
     --main-color: #f44336;
     --white: #fff;
+
+    /* 버튼 기능 */
+    --btn-w: 10em;
+    --dot-w: calc(var(--btn-w) * 0.2);
+    --tr-X: calc(var(--btn-w) - var(--dot-w));
 }
 #app {
     max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-
     font-weight: normal;
 }
 
@@ -37,6 +39,5 @@ a,
     #app {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        padding: 0 2rem;
     }
 }
