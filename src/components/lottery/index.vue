@@ -13,28 +13,33 @@
         </div>
         <ContentsBottom />
     </div>
-    <CardModal v-if="isContinue" />
+    <FullPopup :class="showPopup" @close-popup="onClose" />
 </template>
 <script setup lang="ts">
 import ContentsHead from '@components/lottery/ContentsHead.vue'
 import InputContainer from '@components/lottery/InputContainer.vue'
 import ContentsBottom from '@components/lottery/ContentsBottom.vue'
-import CardModal from '@components/card/index.vue'
+import FullPopup from '@components/card/FullPopup.vue'
 import { ref } from 'vue'
 
 const sectionList = ['A', 'B', 'C', 'D', 'E']
 const selectedMap = new Map()
-const isContinue = ref(false)
+const showPopup = ref('')
+
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
     if (arr) {
         selectedMap.set(index, arr)
         if (selectedMap.size === sectionList.length) {
-            isContinue.value = true
+            showPopup.value = 'full-popup'
         }
     } else {
         selectedMap.delete(index)
     }
+}
+
+function onClose() {
+    showPopup.value = ''
 }
 </script>
 <style lang="scss">
@@ -45,5 +50,8 @@ function setNumberList(index: number, arr?: number[]) {
     .lotto-paper {
         display: flex;
     }
+}
+.full-popup {
+    top: 0;
 }
 </style>
