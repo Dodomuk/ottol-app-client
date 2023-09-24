@@ -174,13 +174,6 @@ function onSubmit() {
         &::after {
             right: -2px;
         }
-        &:hover {
-            width: 30px;
-            height: 54px;
-
-            color: black;
-            background-color: black;
-        }
 
         .checkbox {
             margin: 0;

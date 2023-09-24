@@ -33,8 +33,6 @@ const showPopup = ref('')
 
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
-    // // FIXME: 테스트용 로직
-    showPopup.value = 'full-popup'
     if (arr) {
         selectedMap.set(index, arr)
         if (selectedMap.size === sectionList.length) {
