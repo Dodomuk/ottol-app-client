@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer mt-24">
+        <div class="footer m-4">
             <div class="item mb-5">
                 <div class="box-select">선택 완료</div>
                 <div class="checkbox-wrapper mt-0 ml-1.5" @click="onSubmit">
@@ -32,8 +32,8 @@
 import { ref, reactive } from 'vue'
 
 const props = defineProps({
-    section: String,
-    index: Number
+    section: { type: String, required: false, default: ' ' },
+    index: { type: Number, required: false, default: 0 }
 })
 const emit = defineEmits(['set-number'])
 
@@ -93,7 +93,6 @@ function onSubmit() {
 </script>
 <style scoped lang="scss">
 .container {
-    width: 210px;
     border: solid var(--main-color);
     border-radius: 5px;
     .header {
@@ -105,7 +104,7 @@ function onSubmit() {
             &-class,
             &-price {
                 font-weight: 900;
-                font-size: x-large;
+                font-size: xx-large;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -122,7 +121,7 @@ function onSubmit() {
     .body {
         padding: 3px 0px;
         display: grid;
-        grid-template-columns: repeat(7, 30px);
+        grid-template-columns: repeat(7, 40px);
         justify-content: center;
         place-items: center;
         &.isDisabled {
@@ -144,16 +143,20 @@ function onSubmit() {
     }
     .isChecked {
         background-color: black;
+        &::before,
+        &::after {
+            width: 0px !important;
+        }
     }
     .checkbox-wrapper,
     .isChecked {
         position: relative;
         display: inline-block;
-        width: 15px;
-        height: 27px;
+        width: 30px;
+        height: 54px;
         border: 1px solid var(--main-color);
         color: var(--main-color);
-        font-size: 12px;
+        font-size: 16px;
         font-weight: bold;
         text-align: center;
         &::before,
@@ -162,7 +165,7 @@ function onSubmit() {
             position: absolute;
             top: 20%;
             bottom: 20%;
-            width: 2px;
+            width: 3px;
             background-color: var(--white);
         }
         &::before {
@@ -172,11 +175,13 @@ function onSubmit() {
             right: -2px;
         }
         &:hover {
-            width: 15px;
-            height: 27px;
+            width: 30px;
+            height: 54px;
+
             color: black;
             background-color: black;
         }
+
         .checkbox {
             margin: 0;
             position: absolute;

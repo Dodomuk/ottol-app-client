@@ -1,6 +1,5 @@
 <template>
-    <div class="bottom-container ml-2 mb-16">
-        <div class="subtext mb-24">- 발 행 기 관: Ottol주식회사</div>
+    <div class="bottom-container mt-8 mb-8">
         <div class="submit-btn" @click="showModal">
             <div class="btn">
                 <span>당첨결과 확인</span>
@@ -16,15 +15,6 @@ function showModal() {}
 .bottom-container {
     display: flex;
     flex-direction: column;
-    align-self: end;
-    .subtext {
-        text-align: center;
-        color: var(--main-color);
-        transform: rotate(270deg);
-        font-size: 12px;
-        white-space: nowrap;
-        align-self: start;
-    }
     .submit-btn {
         position: relative;
 

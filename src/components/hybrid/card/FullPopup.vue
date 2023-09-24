@@ -21,7 +21,7 @@
 import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
-import { cardStore } from '@/store/CardStore'
+import { cardStore } from '@store/CardStore'
 
 const emit = defineEmits(['close-popup'])
 const target = ref(null)

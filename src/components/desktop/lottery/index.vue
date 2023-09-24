@@ -18,12 +18,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { cardStore, type CardInfo } from '@/store/CardStore'
+import { cardStore, type CardInfo } from '@store/CardStore'
 
-import ContentsHead from '@components/lottery/ContentsHead.vue'
-import InputContainer from '@components/lottery/InputContainer.vue'
-import ContentsBottom from '@components/lottery/ContentsBottom.vue'
-import FullPopup from '@components/card/FullPopup.vue'
+import ContentsHead from '@hybrid/lottery/ContentsHead.vue'
+import InputContainer from '@hybrid/lottery/InputContainer.vue'
+import ContentsBottom from '@hybrid/lottery/ContentsBottom.vue'
+import FullPopup from '@hybrid/card/FullPopup.vue'
 
 const store = cardStore()
 
@@ -34,7 +34,7 @@ const showPopup = ref('')
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
     // // FIXME: 테스트용 로직
-    // showPopup.value = 'full-popup'
+    showPopup.value = 'full-popup'
     if (arr) {
         selectedMap.set(index, arr)
         if (selectedMap.size === sectionList.length) {

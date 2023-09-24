@@ -8,7 +8,11 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@desktop/*": ["./src/components/desktop/*"],
+      "@mobile/*": ["./src/components/mobile/*"],
+      "@hybrid/*": ["./src/components/hybrid/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@store/*": ["./src/store/*"]
     }
   }
 }

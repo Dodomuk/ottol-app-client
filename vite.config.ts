@@ -9,7 +9,11 @@ export default defineConfig({
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
             '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
-            '@assets': fileURLToPath(new URL('./src/assets', import.meta.url))
+            '@desktop': fileURLToPath(new URL('./src/components/desktop', import.meta.url)),
+            '@mobile': fileURLToPath(new URL('./src/components/mobile', import.meta.url)),
+            '@hybrid': fileURLToPath(new URL('./src/components/hybrid', import.meta.url)),
+            '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
+            '@store': fileURLToPath(new URL('./src/store', import.meta.url))
         }
     }
 })

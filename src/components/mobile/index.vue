@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <LottoPaper />
-    </div>
+    <LottoPaper />
 </template>
 <script setup lang="ts">
 import LottoPaper from '@mobile/lottery/index.vue'
 </script>
-<style scoped lang=""></style>
+<style scoped lang="scss"></style>
