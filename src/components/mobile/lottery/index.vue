@@ -23,7 +23,7 @@ const store = cardStore()
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
     if (arr) {
-        store.cardInfoList = arr
+        store.setCardInfoList(arr)
         showPopup.value = 'full-popup'
     }
 }

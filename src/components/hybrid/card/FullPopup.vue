@@ -28,7 +28,6 @@ const store = cardStore()
 const lottoNumberList = Array(45)
     .fill({})
     .map((x, i) => i + 1)
-const { cardInfoList } = store
 //외부 클릭시 모달 창 닫기
 onClickOutside(target, () => onClose())
 
@@ -37,7 +36,7 @@ function onClose() {
     emit('close-popup')
 }
 function isBlink(idx: number) {
-    return cardInfoList.find((e) => e === idx + 1) ? 'blink' : ''
+    return store.getCardInfoList.value.find((e) => e === idx + 1) ? 'blink' : ''
 }
 </script>
 <style scoped lang="scss">
@@ -124,6 +123,8 @@ function isBlink(idx: number) {
         }
     }
     .blink {
+        border: 1px solid orange !important;
+        color: orange !important;
         animation: blink-effect 1s step-end infinite;
     }
 }
