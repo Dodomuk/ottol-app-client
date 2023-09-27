@@ -1,10 +1,9 @@
 <template>
-    <div class="lotto-container">
+    <div class="lotto-container mb-14">
         <ContentsHead />
         <div class="lotto-paper">
             <InputContainer @set-number="setNumberList" />
         </div>
-        <ContentsBottom />
     </div>
     <FullPopup :class="showPopup" @close-popup="onClose" />
 </template>
@@ -13,7 +12,6 @@ import { ref } from 'vue'
 
 import ContentsHead from '@hybrid/lottery/ContentsHead.vue'
 import InputContainer from '@hybrid/lottery/InputContainer.vue'
-import ContentsBottom from '@hybrid/lottery/ContentsBottom.vue'
 import FullPopup from '@hybrid/card/FullPopup.vue'
 import { cardStore } from '@/store/CardStore'
 
@@ -28,6 +26,7 @@ function setNumberList(index: number, arr?: number[]) {
     }
 }
 
+// 팝업 닫기
 function onClose() {
     showPopup.value = ''
 }

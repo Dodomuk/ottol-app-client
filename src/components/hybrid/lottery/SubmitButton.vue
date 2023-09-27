@@ -1,20 +1,27 @@
 <template>
-    <div class="bottom-container mt-8 mb-8">
+    <div class="button-container mt-8 mb-16">
         <div class="submit-btn" @click="showModal">
             <div class="btn">
-                <span>당첨결과 확인</span>
+                <span>{{ buttonText }}</span>
                 <div class="dot"></div>
             </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
+const props = defineProps({
+    content: { type: String, required: true }
+})
+const buttonText = props.content
+
 function showModal() {}
 </script>
 <style scoped lang="scss">
-.bottom-container {
+.button-container {
     display: flex;
     flex-direction: column;
+    align-content: center;
+    align-items: center;
     .submit-btn {
         position: relative;
 

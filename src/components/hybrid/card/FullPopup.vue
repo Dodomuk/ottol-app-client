@@ -14,6 +14,7 @@
                 </div>
             </div>
         </div>
+        <SubmitButton content="당첨결과 확인" />
     </div>
 </template>
 <script setup lang="ts">
@@ -21,6 +22,8 @@ import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 import { cardStore } from '@store/CardStore'
+
+import SubmitButton from '../lottery/SubmitButton.vue'
 
 const emit = defineEmits(['close-popup'])
 const target = ref(null)
@@ -45,7 +48,7 @@ function isBlink(idx: number) {
     background: #fff;
     color: black;
     width: 90%;
-    height: 70%;
+    height: fit-content;
     margin: auto;
     padding: 0;
     transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
@@ -53,7 +56,7 @@ function isBlink(idx: number) {
     left: 50%;
     transform: translate(-50%);
     text-align: left;
-    border-radius: 4px;
+    border-radius: 8px;
     filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.12)) drop-shadow(0 6px 30px rgba(0, 0, 0, 0.14)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.12))
         drop-shadow(0 -3px 4px rgba(0, 0, 0, 0.1));
     .header {

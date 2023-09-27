@@ -11,21 +11,19 @@
                 @set-number="setNumberList"
             />
         </div>
-        <ContentsBottom />
     </div>
     <FullPopup :class="showPopup" @close-popup="onClose" />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { cardStore, type CardInfo } from '@store/CardStore'
+// import { cardStore, type CardInfo } from '@store/CardStore'
 
 import ContentsHead from '@hybrid/lottery/ContentsHead.vue'
 import InputContainer from '@hybrid/lottery/InputContainer.vue'
-import ContentsBottom from '@hybrid/lottery/ContentsBottom.vue'
 import FullPopup from '@hybrid/card/FullPopup.vue'
 
-const store = cardStore()
+// const store = cardStore()
 
 const sectionList = ['A', 'B', 'C', 'D', 'E']
 const selectedMap = new Map()
@@ -36,9 +34,7 @@ function setNumberList(index: number, arr?: number[]) {
     if (arr) {
         selectedMap.set(index, arr)
         if (selectedMap.size === sectionList.length) {
-            Array.from(selectedMap.values()).forEach((numbers, idx) =>
-                store.cardInfoList.push({ section: sectionList[idx], numbers: numbers.join(', ') } as CardInfo)
-            )
+            // Array.from(selectedMap.values()).forEach((numbers, idx) => store.cardInfoList.push(numbers[0]))
             showPopup.value = 'full-popup'
         }
     } else {
