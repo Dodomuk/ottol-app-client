@@ -1,6 +1,6 @@
 <template>
     <div class="button-container mt-8 mb-16">
-        <div class="submit-btn" @click="showModal">
+        <div class="submit-btn" @click="goNext">
             <div class="btn">
                 <span>{{ buttonText }}</span>
                 <div class="dot"></div>
@@ -12,9 +12,13 @@
 const props = defineProps({
     content: { type: String, required: true }
 })
+const emit = defineEmits(['additional-function'])
+
 const buttonText = props.content
 
-function showModal() {}
+function goNext() {
+    emit('additional-function')
+}
 </script>
 <style scoped lang="scss">
 .button-container {

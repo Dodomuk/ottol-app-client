@@ -14,12 +14,15 @@
                 </div>
             </div>
         </div>
-        <SubmitButton content="당첨결과 확인" />
+        <SubmitButton content="당첨결과 확인" @additional-function="goNext" />
     </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
+
+import { getDrawInfo } from '@/module/mobileModule'
 
 import { cardStore } from '@store/CardStore'
 
@@ -31,6 +34,8 @@ const store = cardStore()
 const lottoNumberList = Array(45)
     .fill({})
     .map((x, i) => i + 1)
+const router = useRouter()
+
 //외부 클릭시 모달 창 닫기
 onClickOutside(target, () => onClose())
 
@@ -40,6 +45,15 @@ function onClose() {
 }
 function isBlink(idx: number) {
     return store.getCardInfoList.value.find((e) => e === idx + 1) ? 'blink' : ''
+}
+
+async function goNext() {
+    try {
+        await getDrawInfo({ selected_no: store.getCardInfoList.value })
+    } catch (err) {
+        console.log('조회된 정보를 찾지 못했습니다.')
+    }
+    router.push({ name: 'listup' })
 }
 </script>
 <style scoped lang="scss">
