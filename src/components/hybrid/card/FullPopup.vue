@@ -24,13 +24,16 @@ import { onClickOutside } from '@vueuse/core'
 
 import { getDrawInfo } from '@/module/mobileModule'
 
-import { cardStore } from '@store/CardStore'
+import { cardDatabase } from '@store/CardStore'
+import { prizeDatabase } from '@store/LotteryStore'
 
 import SubmitButton from '../lottery/SubmitButton.vue'
 
 const emit = defineEmits(['close-popup'])
 const target = ref(null)
-const store = cardStore()
+const cardStore = cardDatabase()
+const prizeStore = prizeDatabase()
+
 const lottoNumberList = Array(45)
     .fill({})
     .map((x, i) => i + 1)
@@ -44,15 +47,20 @@ function onClose() {
     emit('close-popup')
 }
 function isBlink(idx: number) {
-    return store.getCardInfoList.value.find((e) => e === idx + 1) ? 'blink' : ''
+    return cardStore.getCardInfoList.value.find((e) => e === idx + 1) ? 'blink' : ''
 }
 
 async function goNext() {
-    try {
-        await getDrawInfo({ selected_no: store.getCardInfoList.value })
-    } catch (err) {
-        console.log('조회된 정보를 찾지 못했습니다.')
-    }
+    //FIXME: 배열로 줄수 있는지
+    const result = await getDrawInfo({
+        drwtNo1: cardStore.getCardInfoList.value[0],
+        drwtNo2: cardStore.getCardInfoList.value[1],
+        drwtNo3: cardStore.getCardInfoList.value[2],
+        drwtNo4: cardStore.getCardInfoList.value[3],
+        drwtNo5: cardStore.getCardInfoList.value[4],
+        drwtNo6: cardStore.getCardInfoList.value[5]
+    })
+    prizeStore.setMyPrizeInfo(result)
     router.push({ name: 'listup' })
 }
 </script>

@@ -15,5 +15,15 @@ export default defineConfig({
             '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
             '@store': fileURLToPath(new URL('./src/store', import.meta.url))
         }
+    },
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000', // ottol-server(로컬)
+                changeOrigin: true, //CORS 방지
+                //api root 해당경로로 재탐색
+                rewrite: (path) => path.replace(/^\/api/, '/api')
+            }
+        }
     }
 })

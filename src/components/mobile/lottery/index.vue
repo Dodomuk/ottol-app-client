@@ -13,10 +13,10 @@ import { ref } from 'vue'
 import ContentsHead from '@hybrid/lottery/ContentsHead.vue'
 import InputContainer from '@hybrid/lottery/InputContainer.vue'
 import FullPopup from '@hybrid/card/FullPopup.vue'
-import { cardStore } from '@/store/CardStore'
+import { cardDatabase } from '@/store/CardStore'
 
 const showPopup = ref('')
-const store = cardStore()
+const store = cardDatabase()
 
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
