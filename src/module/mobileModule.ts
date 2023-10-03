@@ -13,20 +13,20 @@ export interface DrawRes {
     result: DrawInfo[]
     input: DrawInfo
 }
+
 export interface DrawInfo {
-    drw_No: number
-    drw_No1: number
-    drw_No2: number
-    drw_No3: number
-    drw_No4: number
-    drw_No5: number
-    drw_No6: number
+    drw_no: number //회차
+    drwt_no1: number
+    drwt_no2: number
+    drwt_no3: number
+    drwt_no4: number
+    drwt_no5: number
+    drwt_no6: number
     bnus_no: number
     win_rank: number
     win_pay: string
+    drw_no_date: string
 }
-
-// const store = prizeStore()
 
 export async function getDrawInfo(param: DrawReq) {
     let result = {}

@@ -51,7 +51,6 @@ function isBlink(idx: number) {
 }
 
 async function goNext() {
-    //FIXME: 배열로 줄수 있는지
     const result = await getDrawInfo({
         drwtNo1: cardStore.getCardInfoList.value[0],
         drwtNo2: cardStore.getCardInfoList.value[1],
@@ -67,7 +66,7 @@ async function goNext() {
 <style scoped lang="scss">
 .modal {
     position: fixed;
-    background: #fff;
+    background-color: #fff;
     color: black;
     width: 90%;
     height: fit-content;
@@ -81,6 +80,17 @@ async function goNext() {
     border-radius: 8px;
     filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.12)) drop-shadow(0 6px 30px rgba(0, 0, 0, 0.14)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.12))
         drop-shadow(0 -3px 4px rgba(0, 0, 0, 0.1));
+    ::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        background: linear-gradient(135deg, red 12px, transparent 0%), linear-gradient(-135deg, red 12px, transparent 0%);
+        background-size: 30px;
+    }
+
     .header {
         border-bottom: 1px solid #ddd;
         font: 300 24px Lato;

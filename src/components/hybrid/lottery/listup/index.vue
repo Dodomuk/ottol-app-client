@@ -12,6 +12,14 @@ import { AgGridVue } from 'ag-grid-vue3'
 import { onBeforeMount, ref } from 'vue'
 
 import { prizeDatabase } from '@/store/LotteryStore'
+
+interface Prize {
+    회차: number
+    날짜: string
+    금액: string
+    등수: number
+}
+
 const prizeStore = prizeDatabase()
 const { getMyPrizeInfo } = prizeStore
 onBeforeMount(() => {
@@ -20,9 +28,10 @@ onBeforeMount(() => {
 
 function pageInit() {
     getMyPrizeInfo.result.map((e) => {
-        rowData.value.push({ 회차: e.drw_No, 날짜: '2023-01-01', 금액: e.win_pay, 등수: e.win_rank })
+        rowData.value.push({ 회차: e.drw_no, 날짜: e.drw_no_date, 금액: e.win_pay, 등수: e.win_rank })
     })
 }
+
 // FIXME: 가라 데이터
 const columnDefs = [
     { headerName: '회차', field: '회차' },
@@ -32,7 +41,7 @@ const columnDefs = [
 ]
 
 // FIXME: 가라 데이터
-const rowData = ref([{ 회차: 1, 날짜: '2023-01-01', 금액: '100000', 등수: 1 }])
+const rowData = ref([] as Prize[])
 </script>
 <style scoped lang="scss">
 .listup-container {
