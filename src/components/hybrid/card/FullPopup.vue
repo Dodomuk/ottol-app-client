@@ -2,17 +2,26 @@
     <div class="modal" ref="target">
         <div class="header">
             <div class="title">
-                <div class="maintext text-xl font-bold">입력하신 번호로 결과를 조회할까요?</div>
                 <div class="close-btn" @click="onClose"></div>
             </div>
+            <div class="maintext text-xl font-bold">제 0000회</div>
             <div class="subtext text-xs text-gray-800">※ 당첨번호는 2002년 12월 이내만 조회 가능합니다.</div>
+            <div>발 행 일 : {{ today }}</div>
+            <div>발 행 일 : {{ today }}</div>
         </div>
-        <div class="body">
+        <!-- 이전 버전 -->
+        <!-- <div class="body">
             <div v-for="(number, idx) in lottoNumberList" :key="idx" class="number-body mt-2.5">
                 <div :class="['checkbox-wrapper', isBlink(idx)]">
                     <div class="checkbox">{{ number }}</div>
                 </div>
             </div>
+        </div> -->
+        <!-- 새로운 버전 -->
+        <div class="body">
+            <div>제 0000회</div>
+            <div>제 0000회</div>
+            <div>제 0000회</div>
         </div>
         <SubmitButton content="당첨결과 확인" @additional-function="goNext" />
     </div>
@@ -21,13 +30,14 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
+import { getDateByFullString } from '../../../common/utils'
 
 import { getDrawInfo } from '@/module/mobileModule'
 
 import { cardDatabase } from '@store/CardStore'
 import { prizeDatabase } from '@store/LotteryStore'
 
-import SubmitButton from '../lottery/SubmitButton.vue'
+import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
 
 const emit = defineEmits(['close-popup'])
 const target = ref(null)
@@ -38,7 +48,7 @@ const lottoNumberList = Array(45)
     .fill({})
     .map((x, i) => i + 1)
 const router = useRouter()
-
+const today = getDateByFullString()
 //외부 클릭시 모달 창 닫기
 onClickOutside(target, () => onClose())
 
@@ -80,16 +90,6 @@ async function goNext() {
     border-radius: 8px;
     filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.12)) drop-shadow(0 6px 30px rgba(0, 0, 0, 0.14)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.12))
         drop-shadow(0 -3px 4px rgba(0, 0, 0, 0.1));
-    ::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 30px;
-        background: linear-gradient(135deg, red 12px, transparent 0%), linear-gradient(-135deg, red 12px, transparent 0%);
-        background-size: 30px;
-    }
 
     .header {
         border-bottom: 1px solid #ddd;
