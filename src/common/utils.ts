@@ -4,6 +4,7 @@ export function getDateByFullString() {
         date.getDay()
     )}) ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}` //TODO: 추후 더 나은 함수로 대체
 }
+
 export function getDayOfWeek(day: number) {
     const days = new Map()
     days.set(0, '일')

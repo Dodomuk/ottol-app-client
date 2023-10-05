@@ -32,7 +32,7 @@ function pageInit() {
     })
 }
 
-// FIXME: 가라 데이터
+// FIXME: 가라 데이터 test
 const columnDefs = [
     { headerName: '회차', field: '회차' },
     { headerName: '날짜', field: '날짜' },
