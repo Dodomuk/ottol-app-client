@@ -29,6 +29,7 @@
     </div>
 </template>
 <script setup lang="ts">
+import Swal from 'sweetalert2'
 import { ref, reactive } from 'vue'
 
 const props = defineProps({
@@ -75,7 +76,13 @@ function initializeEmitList() {
 function onSubmit() {
     const checkedList = lottoNumberList.filter((e) => e.checked)
     if (checkedList.length < 6) {
-        alert('숫자를 6개 눌러주세요.')
+        Swal.fire({
+            icon: 'warning',
+            text: '번호를 6개 입력해주세요',
+            iconColor: '#f44336',
+            buttonsStyling: true,
+            confirmButtonColor: '#f44336'
+        })
     } else {
         if (isDisabled.value) {
             isDisabled.value = ''

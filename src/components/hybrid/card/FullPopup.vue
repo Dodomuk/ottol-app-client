@@ -4,10 +4,12 @@
             <div class="title">
                 <div class="close-btn" @click="onClose"></div>
             </div>
-            <div class="maintext text-xl font-bold">제 0000회</div>
-            <div class="subtext text-xs text-gray-800">※ 당첨번호는 2002년 12월 이내만 조회 가능합니다.</div>
-            <div>발 행 일 : {{ today }}</div>
-            <div>발 행 일 : {{ today }}</div>
+            <div class="maintext text-xl text-center font-bold pb-4">제 0000회</div>
+            <div class="dates text-lg pl-2 font-semibold">
+                <div>발 행 일 : {{ today }}</div>
+                <div>추 첨 일 : {{ drawDay }}</div>
+            </div>
+            <div class="subtext text-xs text-gray-800 pl-2">※ 당첨번호는 2002년 12월 이내만 조회 가능합니다.</div>
         </div>
         <!-- 이전 버전 -->
         <!-- <div class="body">
@@ -19,9 +21,13 @@
         </div> -->
         <!-- 새로운 버전 -->
         <div class="body">
-            <div>제 0000회</div>
-            <div>제 0000회</div>
-            <div>제 0000회</div>
+            <div class="body-text text-2xl font-normal">
+                A 자 동 <span class="selected-num font-bold">{{ selectedNumberList }} </span>
+            </div>
+        </div>
+        <div class="footer">
+            <div>금액</div>
+            <div>₩ 1,000</div>
         </div>
         <SubmitButton content="당첨결과 확인" @additional-function="goNext" />
     </div>
@@ -44,20 +50,22 @@ const target = ref(null)
 const cardStore = cardDatabase()
 const prizeStore = prizeDatabase()
 
-const lottoNumberList = Array(45)
-    .fill({})
-    .map((x, i) => i + 1)
 const router = useRouter()
 const today = getDateByFullString()
-//외부 클릭시 모달 창 닫기
+const drawDay = getDrawDate()
+const selectedNumberList = cardStore.getCardInfoList.value.join(' ')
 onClickOutside(target, () => onClose())
 
 //모달 창 닫기
 function onClose() {
     emit('close-popup')
 }
-function isBlink(idx: number) {
-    return cardStore.getCardInfoList.value.find((e) => e === idx + 1) ? 'blink' : ''
+function getDrawDate() {
+    const today = new Date()
+    const getDay = today.getDay()
+    const getSaturdayDate = today.getDate() + 6 - getDay
+    const getDate = new Date(new Date().setDate(getSaturdayDate))
+    return getDateByFullString(getDate)
 }
 
 async function goNext() {
@@ -92,7 +100,6 @@ async function goNext() {
         drop-shadow(0 -3px 4px rgba(0, 0, 0, 0.1));
 
     .header {
-        border-bottom: 1px solid #ddd;
         font: 300 24px Lato;
         position: relative;
         padding: 10px;
@@ -111,10 +118,12 @@ async function goNext() {
         }
     }
     .body {
+        border-bottom: 3px dotted #ddd;
+        border-top: 3px dotted #ddd;
         padding: 20px;
         font: 300 16px Lato;
         display: grid;
-        grid-template-columns: repeat(7, 30px);
+        display: flex;
         justify-content: center;
         place-items: center;
         .checkbox-wrapper {
@@ -161,6 +170,11 @@ async function goNext() {
         border: 1px solid orange !important;
         color: orange !important;
         animation: blink-effect 1s step-end infinite;
+    }
+    .footer {
+        margin: 8px 24px;
+        display: flex;
+        justify-content: space-between;
     }
 }
 </style>

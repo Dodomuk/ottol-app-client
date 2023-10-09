@@ -1,8 +1,10 @@
-export function getDateByFullString() {
-    const date = new Date()
-    return `${date.getFullYear()} / ${date.getMonth() + 1} / ${date.getDate() + 1} (${getDayOfWeek(
-        date.getDay()
-    )}) ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}` //TODO: 추후 더 나은 함수로 대체
+export function getDateByFullString(inputDate?: Date) {
+    const date = inputDate ? inputDate : new Date()
+    return (
+        dateDecorator(`${date.getFullYear()} / ${date.getMonth() + 1} / ${date.getDate()}`, '/') +
+        ` (${getDayOfWeek(date.getDay())}) ` +
+        dateDecorator(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`, ':')
+    )
 }
 
 export function getDayOfWeek(day: number) {
@@ -15,4 +17,12 @@ export function getDayOfWeek(day: number) {
     days.set(5, '금')
     days.set(6, '토')
     return days.get(day)
+}
+
+export function dateDecorator(str: string, symbol = '') {
+    console.log(str)
+    return str
+        .split(/[:/]/g)
+        .map((v) => (v + '').trim().padStart(2, '0'))
+        .join(symbol ? ' ' + symbol + ' ' : '')
 }
