@@ -22,7 +22,7 @@
         <!-- 새로운 버전 -->
         <div class="body">
             <div class="body-text text-2xl font-normal">
-                A 자 동 <span class="selected-num font-bold">{{ selectedNumberList }} </span>
+                A 자 동 <span class="selected-num font-bold">{{ cardStore.getCardInfoText }} </span>
             </div>
         </div>
         <div class="footer">
@@ -33,7 +33,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
 import { getDateByFullString } from '../../../common/utils'
@@ -53,7 +53,7 @@ const prizeStore = prizeDatabase()
 const router = useRouter()
 const today = getDateByFullString()
 const drawDay = getDrawDate()
-const selectedNumberList = cardStore.getCardInfoList.value.join(' ')
+
 onClickOutside(target, () => onClose())
 
 //모달 창 닫기
@@ -90,7 +90,7 @@ async function goNext() {
     height: fit-content;
     margin: auto;
     padding: 0;
-    transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 300ms cubic-bezier(0.86, 0, 0.07, 1);
     top: 100%;
     left: 50%;
     transform: translate(-50%);
