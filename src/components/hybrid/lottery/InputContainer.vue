@@ -29,8 +29,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import Swal from 'sweetalert2'
 import { ref, reactive } from 'vue'
+
+import sweetAlert from '@common/sweetAlert'
 
 const props = defineProps({
     section: { type: String, required: false, default: ' ' },
@@ -52,7 +53,7 @@ const lottoNumberList = reactive(
 function onCheck(index: number) {
     const isMaximum = !lottoNumberList[index].checked && lottoNumberList.filter((e) => e.checked).length >= 6
     if (isMaximum) {
-        alert('6개 이상 체크 불가능')
+        sweetAlert.warning('번호는 6개만 선택 가능해요!')
     } else {
         lottoNumberList[index].checked = !lottoNumberList[index].checked
     }
@@ -76,13 +77,7 @@ function initializeEmitList() {
 function onSubmit() {
     const checkedList = lottoNumberList.filter((e) => e.checked)
     if (checkedList.length < 6) {
-        Swal.fire({
-            icon: 'warning',
-            text: '번호를 6개 입력해주세요',
-            iconColor: '#f44336',
-            buttonsStyling: true,
-            confirmButtonColor: '#f44336'
-        })
+        sweetAlert.warning('번호를 6개 입력해주세요')
     } else {
         if (isDisabled.value) {
             isDisabled.value = ''

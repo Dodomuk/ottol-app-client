@@ -1,5 +1,5 @@
 <template>
-    <div class="button-container mt-8 mb-16">
+    <div class="button-container mt-8 mb-12">
         <div class="submit-btn" @click="goNext">
             <div class="btn">
                 <span>{{ buttonText }}</span>

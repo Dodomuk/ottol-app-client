@@ -12,7 +12,8 @@
       "@mobile/*": ["./src/components/mobile/*"],
       "@hybrid/*": ["./src/components/hybrid/*"],
       "@assets/*": ["./src/assets/*"],
-      "@store/*": ["./src/store/*"]
+      "@store/*": ["./src/store/*"],
+      "@common/*": ["./src/common/*"]
     }
   }
 }

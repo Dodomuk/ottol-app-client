@@ -1,42 +1,47 @@
 <template>
     <div class="modal" ref="target">
-        <div class="header">
-            <div class="title">
-                <div class="close-btn" @click="onClose"></div>
+        <div class="container">
+            <div class="header">
+                <div class="title">
+                    <div class="close-btn" @click="onClose"></div>
+                </div>
+                <div class="maintext text-xl text-center font-bold pb-4">제 0000회</div>
+                <div class="dates text-lg pl-2 font-semibold">
+                    <div>발 행 일 : {{ today }}</div>
+                    <div>추 첨 일 : {{ drawDay }}</div>
+                </div>
+                <div class="subtext text-xs text-gray-800 pl-2">※ 당첨번호는 2002년 12월 이내만 조회 가능합니다.</div>
             </div>
-            <div class="maintext text-xl text-center font-bold pb-4">제 0000회</div>
-            <div class="dates text-lg pl-2 font-semibold">
-                <div>발 행 일 : {{ today }}</div>
-                <div>추 첨 일 : {{ drawDay }}</div>
-            </div>
-            <div class="subtext text-xs text-gray-800 pl-2">※ 당첨번호는 2002년 12월 이내만 조회 가능합니다.</div>
-        </div>
-        <!-- 이전 버전 -->
-        <!-- <div class="body">
+            <!-- 이전 버전 -->
+            <!-- <div class="body">
             <div v-for="(number, idx) in lottoNumberList" :key="idx" class="number-body mt-2.5">
                 <div :class="['checkbox-wrapper', isBlink(idx)]">
                     <div class="checkbox">{{ number }}</div>
                 </div>
             </div>
         </div> -->
-        <!-- 새로운 버전 -->
-        <div class="body">
-            <div class="body-text text-2xl font-normal">
-                A 자 동 <span class="selected-num font-bold">{{ cardStore.getCardInfoText }} </span>
+            <!-- 새로운 버전 -->
+            <div class="body">
+                <div class="body-text text-2xl font-normal">
+                    <div class="flex-line">A</div>
+                    <div class="flex-line">자 동</div>
+                    <div class="number-list font-bold">{{ cardStore.getCardInfoText }}</div>
+                </div>
             </div>
+            <div class="footer">
+                <div>금액</div>
+                <div>₩ 1,000</div>
+            </div>
+            <SubmitButton content="당첨결과 확인" @additional-function="goNext" />
         </div>
-        <div class="footer">
-            <div>금액</div>
-            <div>₩ 1,000</div>
-        </div>
-        <SubmitButton content="당첨결과 확인" @additional-function="goNext" />
+        <div class="line-decorator"></div>
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
-import { getDateByFullString } from '../../../common/utils'
+import { getDateByFullString } from '@common/utils'
 
 import { getDrawInfo } from '@/module/mobileModule'
 
@@ -84,6 +89,7 @@ async function goNext() {
 <style scoped lang="scss">
 .modal {
     position: fixed;
+    display: flex;
     background-color: #fff;
     color: black;
     width: 90%;
@@ -99,82 +105,101 @@ async function goNext() {
     filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.12)) drop-shadow(0 6px 30px rgba(0, 0, 0, 0.14)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.12))
         drop-shadow(0 -3px 4px rgba(0, 0, 0, 0.1));
 
-    .header {
-        font: 300 24px Lato;
-        position: relative;
-        padding: 10px;
-        .title {
+    .container {
+        > .header {
+            font: 300 24px Lato;
+            position: relative;
+            padding: 10px;
+            .title {
+                display: flex;
+                justify-content: space-between;
+            }
+            // 닫기 버튼
+            .close-btn {
+                margin-top: -2px;
+                &:after {
+                    display: inline-block;
+                    content: '\00d7';
+                    font-size: 15pt;
+                }
+            }
+        }
+        .body {
+            border-bottom: 3px dotted #ddd;
+            border-top: 3px dotted #ddd;
+            padding: 20px;
+            font: 300 16px Lato;
+            display: grid;
+            display: flex;
+            justify-content: center;
+            place-items: center;
+            .checkbox-wrapper {
+                position: relative;
+                display: inline-block;
+                width: 15px;
+                height: 30px;
+                border: 1px solid var(--main-color);
+                color: var(--main-color);
+                font-size: 12px;
+                font-weight: bold;
+                text-align: center;
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 20%;
+                    bottom: 20%;
+                    width: 2px;
+                    background-color: var(--white);
+                }
+                &::before {
+                    left: -2px;
+                }
+                &::after {
+                    right: -2px;
+                }
+
+                .checkbox {
+                    margin: 0;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+            .body-text {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                > .flex-line {
+                    letter-spacing: 10px;
+                }
+                > .number-list {
+                    word-spacing: 6px;
+                }
+            }
+        }
+        @keyframes blink-effect {
+            50% {
+                opacity: 0;
+            }
+        }
+        .blink {
+            border: 1px solid orange !important;
+            color: orange !important;
+            animation: blink-effect 1s step-end infinite;
+        }
+        .footer {
+            margin: 8px 24px;
             display: flex;
             justify-content: space-between;
         }
-        // 닫기 버튼
-        .close-btn {
-            margin-top: -2px;
-            &:after {
-                display: inline-block;
-                content: '\00d7';
-                font-size: 15pt;
-            }
-        }
     }
-    .body {
-        border-bottom: 3px dotted #ddd;
-        border-top: 3px dotted #ddd;
-        padding: 20px;
-        font: 300 16px Lato;
-        display: grid;
-        display: flex;
-        justify-content: center;
-        place-items: center;
-        .checkbox-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 15px;
-            height: 30px;
-            border: 1px solid var(--main-color);
-            color: var(--main-color);
-            font-size: 12px;
-            font-weight: bold;
-            text-align: center;
-            &::before,
-            &::after {
-                content: '';
-                position: absolute;
-                top: 20%;
-                bottom: 20%;
-                width: 2px;
-                background-color: var(--white);
-            }
-            &::before {
-                left: -2px;
-            }
-            &::after {
-                right: -2px;
-            }
-
-            .checkbox {
-                margin: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
-    }
-    @keyframes blink-effect {
-        50% {
-            opacity: 0;
-        }
-    }
-    .blink {
-        border: 1px solid orange !important;
-        color: orange !important;
-        animation: blink-effect 1s step-end infinite;
-    }
-    .footer {
-        margin: 8px 24px;
-        display: flex;
-        justify-content: space-between;
+    .line-decorator {
+        width: 5%;
+        background-color: #ff69b4;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
     }
 }
 </style>
