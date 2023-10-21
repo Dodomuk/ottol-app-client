@@ -20,7 +20,6 @@ export function getDayOfWeek(day: number) {
 }
 
 export function dateDecorator(str: string, symbol = '') {
-    console.log(str)
     return str
         .split(/[:/]/g)
         .map((v) => (v + '').trim().padStart(2, '0'))

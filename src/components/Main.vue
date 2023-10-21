@@ -1,6 +1,8 @@
 <template>
     <div>
-        <LottoPaper />
+        <keep-alive>
+            <LottoPaper />
+        </keep-alive>
     </div>
 </template>
 <script setup lang="ts">

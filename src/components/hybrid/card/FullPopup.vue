@@ -83,7 +83,8 @@ async function goNext() {
         drwtNo6: cardStore.getCardInfoList.value[5]
     })
     prizeStore.setMyPrizeInfo(result)
-    router.push({ name: 'listup' })
+    const highestRank = prizeStore.getHighestRank
+    router.push({ name: 'resultpage', params: { rank: highestRank.win_rank, pay: highestRank.win_pay, date: highestRank.drw_no_date } })
 }
 </script>
 <style scoped lang="scss">
