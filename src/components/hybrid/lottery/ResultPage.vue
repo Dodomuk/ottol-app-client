@@ -3,6 +3,15 @@
         <div class="rp-title" v-html="title" />
         <div class="rp-contents" v-html="contents" />
         <img src="../../../../public/sample.jpeg" class="sample-image" alt="임시용" />
+        <div class="rp-grid">
+            <div v-for="(item, index) in bestFive" :key="index" class="grid-container">
+                <div>{{ index }}</div>
+                <div>{{ item.win_rank }}등</div>
+                <div>{{ item.drw_no }}회차</div>
+                <div>{{ item.win_pay }}원</div>
+                <div>{{ item.drw_no_date }}</div>
+            </div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -18,6 +27,7 @@ const rank = rankDetail.win_rank
 const prize = rankDetail.win_pay
 const date = rankDetail.drw_no_date
 
+const bestFive = prizeStore.getRankSortByAsc.slice(0, 5)
 let title = ''
 let contents = ''
 
@@ -51,7 +61,7 @@ function contentProvider() {
     }
 
     //contents
-    // TODO: param 안들어옴
+    // TODO: router param 안들어옴
     const yearGap = new Date().getFullYear() - Number(date.slice(0, 3))
     contents = contents + `<br> ${yearGap}년 전 나는 ${prize}원을 놓쳤어요.`
 }
@@ -70,6 +80,18 @@ function contentProvider() {
             color: darkgray;
             margin-bottom: 32px;
             font-weight: 700;
+        }
+        &-grid {
+            margin: 32px 1px;
+            > .grid-container {
+                display: grid;
+                grid-template-columns: 10% 20% 20% 20% 30%;
+                text-align: center;
+                padding: 4px 0;
+                > div {
+                    border: 1px solid olivedrab;
+                }
+            }
         }
     }
 }

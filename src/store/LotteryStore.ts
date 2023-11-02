@@ -16,9 +16,18 @@ export const prizeDatabase = defineStore('prize', () => {
                 }
             })[0]
     )
+    const getRankSortByAsc = computed(() =>
+        myPrizeInfo.value.result.sort((a, b) => {
+            if (a.win_rank < b.win_rank || (a.win_rank === b.win_rank && a.win_pay >= b.win_pay)) {
+                return 1
+            } else {
+                return -1
+            }
+        })
+    )
     function setMyPrizeInfo(param: any) {
         myPrizeInfo.value = param as DrawRes
     }
 
-    return { getMyPrizeInfo, getHighestRank, setMyPrizeInfo }
+    return { getMyPrizeInfo, getHighestRank, getRankSortByAsc, setMyPrizeInfo }
 })
