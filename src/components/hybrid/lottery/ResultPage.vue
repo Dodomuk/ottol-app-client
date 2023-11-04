@@ -61,8 +61,8 @@ function contentProvider() {
     }
 
     //contents
-    // TODO: router param 안들어옴
-    const yearGap = new Date().getFullYear() - Number(date.slice(0, 3))
+
+    const yearGap = new Date().getFullYear() - Number(date.slice(0, 4))
     contents = contents + `<br> ${yearGap}년 전 나는 ${prize}원을 놓쳤어요.`
 }
 </script>

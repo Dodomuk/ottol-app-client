@@ -1,7 +1,65 @@
 <template>
-    <LottoPaper />
+    <div class="main-container">
+        <form class="main-form">
+            <select>
+                <option selected value="0">Pure CSS Select</option>
+                <option value="1">No Wrapper</option>
+                <option value="2">No JS</option>
+                <option value="3">Nice!</option>
+            </select>
+        </form>
+    </div>
+    <!-- <LottoPaper /> -->
 </template>
 <script setup lang="ts">
-import LottoPaper from '@mobile/lottery/index.vue'
+// import LottoPaper from '@mobile/lottery/index.vue'
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+:root {
+    --arrow-bg: rgba(255, 255, 255, 0.3);
+    --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+    --option-bg: black;
+    --select-bg: rgba(255, 255, 255, 0.2);
+}
+* {
+    box-sizing: border-box;
+}
+.main-form {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: linear-gradient(35deg, red, purple);
+    height: 100%;
+}
+/* <select> styles */
+select {
+    /* Reset */
+    appearance: none;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    /* Personalize */
+    width: 20rem;
+    padding: 1rem 4rem 1rem 1rem;
+    background:
+        var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+        linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+    color: white;
+    border-radius: 0.25em;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    /* Remove IE arrow */
+    &::-ms-expand {
+        display: none;
+    }
+    /* Remove focus outline */
+    &:focus {
+        outline: none;
+    }
+    /* <option> colors */
+    option {
+        color: inherit;
+        background-color: var(--option-bg);
+    }
+}
+</style>

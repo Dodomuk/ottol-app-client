@@ -1,11 +1,11 @@
 <template>
     <div>
         <keep-alive>
-            <LottoPaper />
+            <Main />
         </keep-alive>
     </div>
 </template>
 <script setup lang="ts">
-import LottoPaper from '@mobile/lottery/index.vue'
+import Main from '@mobile/index.vue'
 </script>
 <style scoped lang=""></style>

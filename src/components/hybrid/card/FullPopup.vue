@@ -12,20 +12,12 @@
                 </div>
                 <div class="subtext text-xs text-gray-800 pl-2">※ 당첨번호는 2002년 12월 이내만 조회 가능합니다.</div>
             </div>
-            <!-- 이전 버전 -->
-            <!-- <div class="body">
-            <div v-for="(number, idx) in lottoNumberList" :key="idx" class="number-body mt-2.5">
-                <div :class="['checkbox-wrapper', isBlink(idx)]">
-                    <div class="checkbox">{{ number }}</div>
-                </div>
-            </div>
-        </div> -->
             <!-- 새로운 버전 -->
             <div class="body">
                 <div class="body-text text-2xl font-normal">
-                    <div class="flex-line">A</div>
-                    <div class="flex-line">자 동</div>
-                    <div class="number-list font-bold">{{ cardStore.getCardInfoText }}</div>
+                    <div class="flex-line whitespace-nowrap">A</div>
+                    <div class="flex-line whitespace-nowrap">자 동</div>
+                    <div class="number-list font-bold whitespace-nowrap">{{ cardStore.getCardInfoText }}</div>
                 </div>
             </div>
             <div class="footer">
