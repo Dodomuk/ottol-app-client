@@ -1,18 +1,28 @@
 <template>
     <div class="main-container">
         <form class="main-form">
-            <select>
-                <option selected value="0">Pure CSS Select</option>
-                <option value="1">No Wrapper</option>
-                <option value="2">No JS</option>
-                <option value="3">Nice!</option>
+            <select required>
+                <option disabled selected hidden>당신의 생일은?</option>
+                <option v-for="(year, idx) of yearList" :key="idx" :value="year">{{ year }}</option>
             </select>
+            <SubmitButton content="시작하기" @additional-function="goNext" />
         </form>
     </div>
     <!-- <LottoPaper /> -->
 </template>
 <script setup lang="ts">
-// import LottoPaper from '@mobile/lottery/index.vue'
+import { useRouter } from 'vue-router'
+
+import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
+import LottoPaper from '@mobile/lottery/index.vue'
+
+const yearList = new Array(80).fill(new Date().getFullYear()).map((x, idx) => x - idx - 1)
+const router = useRouter()
+
+function goNext() {
+    console.log('go Next')
+    // router.push({ name: 'resultpage', params: { year: } })
+}
 </script>
 <style scoped lang="scss">
 :root {
