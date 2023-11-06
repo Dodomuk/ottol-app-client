@@ -2,7 +2,7 @@
     <div class="main-container">
         <form class="main-form">
             <select required>
-                <option disabled selected hidden>당신의 생일은?</option>
+                <option disabled selected hidden>당신의 나이는?</option>
                 <option v-for="(year, idx) of yearList" :key="idx" :value="year">{{ year }}</option>
             </select>
             <SubmitButton content="시작하기" @additional-function="goNext" />
@@ -16,7 +16,7 @@ import { useRouter } from 'vue-router'
 import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
 import LottoPaper from '@mobile/lottery/index.vue'
 
-const yearList = new Array(80).fill(new Date().getFullYear()).map((x, idx) => x - idx - 1)
+const yearList = new Array(80).fill(0).map((x, idx) => 7 + idx)
 const router = useRouter()
 
 function goNext() {
