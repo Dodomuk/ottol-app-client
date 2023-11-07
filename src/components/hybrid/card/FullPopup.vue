@@ -41,6 +41,7 @@ import { cardDatabase } from '@store/CardStore'
 import { prizeDatabase } from '@store/LotteryStore'
 
 import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
+import Swal from 'sweetalert2'
 
 const emit = defineEmits(['close-popup'])
 const target = ref(null)
@@ -50,6 +51,10 @@ const prizeStore = prizeDatabase()
 const router = useRouter()
 const today = getDateByFullString()
 const drawDay = getDrawDate()
+
+const yearOptions = new Array(70).fill(new Date().getFullYear()).reduce((acc, cur, idx) => {
+    return { ...acc, [cur - idx - 1]: `${cur - idx - 1}년` }
+})
 
 onClickOutside(target, () => onClose())
 
@@ -66,17 +71,42 @@ function getDrawDate() {
 }
 
 async function goNext() {
-    const result = await getDrawInfo({
-        drwtNo1: cardStore.getCardInfoList.value[0],
-        drwtNo2: cardStore.getCardInfoList.value[1],
-        drwtNo3: cardStore.getCardInfoList.value[2],
-        drwtNo4: cardStore.getCardInfoList.value[3],
-        drwtNo5: cardStore.getCardInfoList.value[4],
-        drwtNo6: cardStore.getCardInfoList.value[5]
+    onClose() // 이전 모달 창 닫기
+    console.log(yearOptions)
+    await Swal.fire({
+        title: '당신의 출생년도는?',
+        input: 'select',
+        inputPlaceholder: '출생년도를 선택해주세요',
+        showCancelButton: true,
+        inputOptions: yearOptions,
+        buttonsStyling: true,
+        confirmButtonColor: '#f44336',
+        confirmButtonText: '결과 보기',
+        cancelButtonText: '돌아가기',
+        inputValidator: async (res) => {
+            //FIXME: res(나이) 담아서 리스트 받아오기!
+            console.log(res)
+            if (res) {
+                const result = await getDrawInfo({
+                    drwtNo1: cardStore.getCardInfoList.value[0],
+                    drwtNo2: cardStore.getCardInfoList.value[1],
+                    drwtNo3: cardStore.getCardInfoList.value[2],
+                    drwtNo4: cardStore.getCardInfoList.value[3],
+                    drwtNo5: cardStore.getCardInfoList.value[4],
+                    drwtNo6: cardStore.getCardInfoList.value[5]
+                })
+                prizeStore.setMyPrizeInfo(result)
+
+                router.push({ name: 'resultpage' })
+            } else {
+                Swal.fire({
+                    title: '출생년도를 입력해주세요!',
+                    confirmButtonText: '확인',
+                    confirmButtonColor: '#f44336'
+                }).then(() => goNext())
+            }
+        }
     })
-    prizeStore.setMyPrizeInfo(result)
-    const highestRank = prizeStore.getHighestRank
-    router.push({ name: 'resultpage', params: { rank: highestRank.win_rank, pay: highestRank.win_pay, date: highestRank.drw_no_date } })
 }
 </script>
 <style scoped lang="scss">
