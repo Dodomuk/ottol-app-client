@@ -72,7 +72,6 @@ function getDrawDate() {
 
 async function goNext() {
     onClose() // 이전 모달 창 닫기
-    console.log(yearOptions)
     await Swal.fire({
         title: '당신의 출생년도는?',
         input: 'select',
@@ -84,8 +83,6 @@ async function goNext() {
         confirmButtonText: '결과 보기',
         cancelButtonText: '돌아가기',
         inputValidator: async (res) => {
-            //FIXME: res(나이) 담아서 리스트 받아오기!
-            console.log(res)
             if (res) {
                 const result = await getDrawInfo({
                     drwtNo1: cardStore.getCardInfoList.value[0],
@@ -93,7 +90,8 @@ async function goNext() {
                     drwtNo3: cardStore.getCardInfoList.value[2],
                     drwtNo4: cardStore.getCardInfoList.value[3],
                     drwtNo5: cardStore.getCardInfoList.value[4],
-                    drwtNo6: cardStore.getCardInfoList.value[5]
+                    drwtNo6: cardStore.getCardInfoList.value[5],
+                    year: Number(res)
                 })
                 prizeStore.setMyPrizeInfo(result)
 
