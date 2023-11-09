@@ -1,4 +1,9 @@
 import axios from 'axios'
+export interface Meta {
+    year: number
+    age: number
+    ageTwentyYear: number
+}
 
 export interface DrawReq {
     drwtNo1: number
@@ -7,12 +12,11 @@ export interface DrawReq {
     drwtNo4: number
     drwtNo5: number
     drwtNo6: number
-    year: number
 }
 
 export interface DrawRes {
-    result: DrawInfo[]
-    input: DrawInfo
+    result: DrawInfo
+    meta: Meta
 }
 
 export interface DrawInfo {
@@ -36,9 +40,9 @@ export interface DrawListReq {
     drwtNo4: number
     drwtNo5: number
     drwtNo6: number
-    year: number
-    pageNum: number
-    pageSize: number
+    page?: number // default 1
+    size?: number // default 5
+    order?: string // default desc(내림차순) "'DESC' 'ASC' 중 택 1"
 }
 
 export interface DrawListRes {
@@ -46,10 +50,14 @@ export interface DrawListRes {
     input: DrawInfo
 }
 
-export async function getDrawInfo(param: DrawReq) {
-    let result = {}
+/**출생년도:
+    19세 미만 -> 출생년도 기준 가장 큰 결과 1
+    19세 이상 -> 성인이 된 년도를 기눈 가장 큰 결과 1
+*/
+export async function getDrawInfoByYear(param: DrawReq, year: number) {
+    let result = {} as DrawRes
     await axios
-        .get('/api/v1/find', {
+        .get(`/api/v1/lotto/find/${year}`, {
             params: param
         })
         .then((res) => {
@@ -66,7 +74,7 @@ export async function getDrawInfo(param: DrawReq) {
 export async function getDrawList(param: DrawListReq) {
     let result = {}
     await axios
-        .get('/api/v1/find', {
+        .get('/api/v1/lotto/find', {
             params: param
         })
         .then((res) => {

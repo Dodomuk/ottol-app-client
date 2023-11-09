@@ -27,9 +27,9 @@ onBeforeMount(() => {
 })
 
 function pageInit() {
-    getMyPrizeInfo.result.map((e) => {
-        rowData.value.push({ 회차: e.drw_no, 날짜: e.drw_no_date, 금액: e.win_pay, 등수: e.win_rank })
-    })
+    // getMyPrizeInfo.result.map((e) => {
+    //     rowData.value.push({ 회차: e.drw_no, 날짜: e.drw_no_date, 금액: e.win_pay, 등수: e.win_rank })
+    // })
 }
 
 // FIXME: 가라 데이터 test

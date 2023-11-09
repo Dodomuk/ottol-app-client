@@ -3,7 +3,7 @@
         <div class="rp-title" v-html="title" />
         <div class="rp-contents" v-html="contents" />
         <img src="../../../../public/sample.jpeg" class="sample-image" alt="임시용" />
-        <div class="rp-grid">
+        <!-- <div class="rp-grid">
             <div v-for="(item, index) in bestFive" :key="index" class="grid-container">
                 <div>{{ index }}</div>
                 <div>{{ item.win_rank }}등</div>
@@ -11,7 +11,7 @@
                 <div>{{ item.win_pay }}원</div>
                 <div>{{ item.drw_no_date }}</div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script setup lang="ts">
@@ -22,12 +22,12 @@ import { prizeDatabase } from '@/store/LotteryStore'
 const prizeStore = prizeDatabase()
 
 // params
-const rankDetail = prizeStore.getHighestRank
+const rankDetail = prizeStore.getMyPrizeInfo
 const rank = rankDetail.win_rank
 const prize = rankDetail.win_pay
 const date = rankDetail.drw_no_date
 
-const bestFive = prizeStore.getRankSortByAsc.slice(0, 5)
+// const bestFive = prizeStore.getRankSortByAsc.slice(0, 5)
 let title = ''
 let contents = ''
 

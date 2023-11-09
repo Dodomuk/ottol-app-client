@@ -35,7 +35,7 @@ import { useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
 import { getDateByFullString } from '@common/utils'
 
-import { getDrawInfo } from '@/module/mobileModule'
+import { getDrawInfoByYear } from '@/module/mobileModule'
 
 import { cardDatabase } from '@store/CardStore'
 import { prizeDatabase } from '@store/LotteryStore'
@@ -84,16 +84,18 @@ async function goNext() {
         cancelButtonText: '돌아가기',
         inputValidator: async (res) => {
             if (res) {
-                const result = await getDrawInfo({
-                    drwtNo1: cardStore.getCardInfoList.value[0],
-                    drwtNo2: cardStore.getCardInfoList.value[1],
-                    drwtNo3: cardStore.getCardInfoList.value[2],
-                    drwtNo4: cardStore.getCardInfoList.value[3],
-                    drwtNo5: cardStore.getCardInfoList.value[4],
-                    drwtNo6: cardStore.getCardInfoList.value[5],
-                    year: Number(res)
-                })
-                prizeStore.setMyPrizeInfo(result)
+                const result = await getDrawInfoByYear(
+                    {
+                        drwtNo1: cardStore.getCardInfoList.value[0],
+                        drwtNo2: cardStore.getCardInfoList.value[1],
+                        drwtNo3: cardStore.getCardInfoList.value[2],
+                        drwtNo4: cardStore.getCardInfoList.value[3],
+                        drwtNo5: cardStore.getCardInfoList.value[4],
+                        drwtNo6: cardStore.getCardInfoList.value[5]
+                    },
+                    Number(res)
+                )
+                prizeStore.setMyPrizeInfo(result.result)
 
                 router.push({ name: 'resultpage' })
             } else {
