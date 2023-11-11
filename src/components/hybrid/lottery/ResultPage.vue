@@ -3,21 +3,17 @@
         <div class="rp-title" v-html="title" />
         <div class="rp-contents" v-html="contents" />
         <img src="../../../../public/sample.jpeg" class="sample-image" alt="임시용" />
-        <!-- <div class="rp-grid">
-            <div v-for="(item, index) in bestFive" :key="index" class="grid-container">
-                <div>{{ index }}</div>
-                <div>{{ item.win_rank }}등</div>
-                <div>{{ item.drw_no }}회차</div>
-                <div>{{ item.win_pay }}원</div>
-                <div>{{ item.drw_no_date }}</div>
-            </div>
-        </div> -->
+    </div>
+    <div class="btn-container">
+        <SubmitButton class="btn-submit" content="당첨결과 더보기" @additional-function="onDetail" />
+        <div class="btn-retry" @click="retry">다시하기</div>
     </div>
 </template>
 <script setup lang="ts">
 import { onBeforeMount } from 'vue'
 
 import { prizeDatabase } from '@/store/LotteryStore'
+import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
 
 const prizeStore = prizeDatabase()
 
@@ -65,6 +61,14 @@ function contentProvider() {
     const yearGap = new Date().getFullYear() - Number(date.slice(0, 4))
     contents = contents + `<br> ${yearGap}년 전 나는 ${prize}원을 놓쳤어요.`
 }
+
+function onDetail() {
+    console.log('더보기')
+}
+
+function retry() {
+    console.log('돌아가기')
+}
 </script>
 <style lang="scss">
 .rp-container {
@@ -81,17 +85,21 @@ function contentProvider() {
             margin-bottom: 32px;
             font-weight: 700;
         }
-        &-grid {
-            margin: 32px 1px;
-            > .grid-container {
-                display: grid;
-                grid-template-columns: 10% 20% 20% 20% 30%;
-                text-align: center;
-                padding: 4px 0;
-                > div {
-                    border: 1px solid olivedrab;
-                }
-            }
+    }
+}
+.btn-container {
+    position: fixed;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .btn {
+        &-submit {
+            margin-bottom: 8px !important;
+        }
+        &-retry {
+            text-align: center;
+            text-decoration: underline;
         }
     }
 }

@@ -30,7 +30,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
 import { getDateByFullString } from '@common/utils'
@@ -52,11 +52,20 @@ const router = useRouter()
 const today = getDateByFullString()
 const drawDay = getDrawDate()
 
-const yearOptions = new Array(70).fill(new Date().getFullYear()).reduce((acc, cur, idx) => {
-    return { ...acc, [cur - idx - 1]: `${cur - idx - 1}년` }
+const yearOptions = new Map()
+
+onBeforeMount(() => {
+    pageInit()
 })
 
 onClickOutside(target, () => onClose())
+
+function pageInit() {
+    // 년도 리스트 셋팅
+    new Array(70).fill(new Date().getFullYear()).forEach((year, idx) => {
+        yearOptions.set(year - idx - 1, `${year - idx - 1}년`)
+    })
+}
 
 //모달 창 닫기
 function onClose() {
