@@ -4,30 +4,19 @@ import { computed, ref } from 'vue'
 import type { DrawInfo, DrawRes } from '@/module/mobileModule'
 
 export const prizeDatabase = defineStore('prize', () => {
+    // 1등 수상 내역
     const myPrizeInfo = ref({} as DrawInfo)
     const getMyPrizeInfo = computed(() => myPrizeInfo.value)
-    // const getHighestRank = computed(
-    //     () =>
-    //         myPrizeInfo.value.result.sort((a, b) => {
-    //             if (a.win_rank < b.win_rank || (a.win_rank === b.win_rank && a.win_pay >= b.win_pay)) {
-    //                 return 1
-    //             } else {
-    //                 return -1
-    //             }
-    //         })[0]
-    // )
-    // const getRankSortByAsc = computed(() =>
-    //     myPrizeInfo.value.result.sort((a, b) => {
-    //         if (a.win_rank < b.win_rank || (a.win_rank === b.win_rank && a.win_pay >= b.win_pay)) {
-    //             return 1
-    //         } else {
-    //             return -1
-    //         }
-    //     })
-    // )
     function setMyPrizeInfo(param: any) {
         myPrizeInfo.value = param as DrawInfo
     }
 
-    return { getMyPrizeInfo, setMyPrizeInfo }
+    //당첨 목록
+    const prizeInfoList = ref([] as DrawInfo[])
+    const getPrizeInfoList = computed(() => prizeInfoList.value)
+    function setPrizeInfoList(param: any) {
+        prizeInfoList.value = param as DrawInfo[]
+    }
+
+    return { getMyPrizeInfo, setMyPrizeInfo, getPrizeInfoList, setPrizeInfoList }
 })

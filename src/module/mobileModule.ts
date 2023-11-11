@@ -3,6 +3,12 @@ export interface Meta {
     year: number
     age: number
     ageTwentyYear: number
+    page: number
+    size: number
+    itemCount: number
+    pageCount: number
+    hasNext: boolean
+    hasPrev: boolean
 }
 
 export interface DrawReq {
@@ -47,7 +53,7 @@ export interface DrawListReq {
 
 export interface DrawListRes {
     result: DrawInfo[]
-    input: DrawInfo
+    meta: Meta
 }
 
 /**출생년도:
@@ -72,7 +78,7 @@ export async function getDrawInfoByYear(param: DrawReq, year: number) {
 }
 
 export async function getDrawList(param: DrawListReq) {
-    let result = {}
+    let result = {} as DrawListRes
     await axios
         .get('/api/v1/lotto/find', {
             params: param

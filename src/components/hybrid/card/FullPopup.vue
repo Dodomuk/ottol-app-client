@@ -93,17 +93,7 @@ async function goNext() {
         cancelButtonText: '돌아가기',
         inputValidator: async (res) => {
             if (res) {
-                const result = await getDrawInfoByYear(
-                    {
-                        drwtNo1: cardStore.getCardInfoList.value[0],
-                        drwtNo2: cardStore.getCardInfoList.value[1],
-                        drwtNo3: cardStore.getCardInfoList.value[2],
-                        drwtNo4: cardStore.getCardInfoList.value[3],
-                        drwtNo5: cardStore.getCardInfoList.value[4],
-                        drwtNo6: cardStore.getCardInfoList.value[5]
-                    },
-                    Number(res)
-                )
+                const result = await getDrawInfoByYear(cardStore.getSelectedNumberParam, Number(res))
                 prizeStore.setMyPrizeInfo(result.result)
 
                 router.push({ name: 'resultpage' })

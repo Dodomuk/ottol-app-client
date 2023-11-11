@@ -11,11 +11,18 @@
 </template>
 <script setup lang="ts">
 import { onBeforeMount } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { prizeDatabase } from '@/store/LotteryStore'
+import { cardDatabase } from '@/store/CardStore'
+
 import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
+import { getDrawList } from '@/module/mobileModule'
 
 const prizeStore = prizeDatabase()
+const cardStore = cardDatabase()
+
+const router = useRouter()
 
 // params
 const rankDetail = prizeStore.getMyPrizeInfo
@@ -23,7 +30,6 @@ const rank = rankDetail.win_rank
 const prize = rankDetail.win_pay
 const date = rankDetail.drw_no_date
 
-// const bestFive = prizeStore.getRankSortByAsc.slice(0, 5)
 let title = ''
 let contents = ''
 
@@ -62,12 +68,14 @@ function contentProvider() {
     contents = contents + `<br> ${yearGap}년 전 나는 ${prize}원을 놓쳤어요.`
 }
 
-function onDetail() {
-    console.log('더보기')
+async function onDetail() {
+    const res = await getDrawList(cardStore.getSelectedNumberParam)
+    prizeStore.setPrizeInfoList(res.result)
+    router.push({ name: 'resultDetailPage' })
 }
 
 function retry() {
-    console.log('돌아가기')
+    router.back()
 }
 </script>
 <style lang="scss">
