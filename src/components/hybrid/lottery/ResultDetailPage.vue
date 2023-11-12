@@ -1,6 +1,16 @@
 <template>
     <div class="listup-container">
-        <div class="mt-8 mb-6">당첨 상세 내역</div>
+        <div class="header mt-8 mb-6">당첨 상세 내역</div>
+        <div class="tips">
+            <div class="tip">
+                <img src="../../../../public/book.png" class="sample-image" alt="책" />
+                <div class="text">로또는 2002년 12월 2일부터 시작되었다.</div>
+            </div>
+            <div class="tip">
+                <img src="../../../../public/lighthouse.png" class="sample-image" alt="전구" />
+                <div class="text">로또 구매는 20살이 되는 해 1월 1일부터 구매가 가능하며, 당첨금 수령은 만으로 19세부터 수령이 가능하다.</div>
+            </div>
+        </div>
         <ag-grid-vue style="height: 500px" class="ag-theme-alpine container" :columnDefs="columnDefs" :rowData="rowData"> </ag-grid-vue>
     </div>
 </template>
@@ -47,8 +57,41 @@ const columnDefs = [
 </script>
 <style scoped lang="scss">
 .listup-container {
-    font-size: x-large;
-    font-weight: 700;
-    text-align: center;
+    height: 100%;
+    background-color: var(--main-color);
+    padding: 15px 30px;
+    .header {
+        color: var(--white);
+        font-size: x-large;
+        font-weight: 700;
+        text-align: center;
+    }
+    .tips {
+        overflow: hidden;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        .tip {
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+            max-width: 550px;
+            padding: 10px;
+            position: relative;
+            .sample-image {
+                width: 10%;
+                padding-right: 10px;
+            }
+            .text {
+                width: 100%;
+            }
+        }
+    }
 }
 </style>

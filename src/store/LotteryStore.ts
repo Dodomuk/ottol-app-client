@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import type { DrawInfo, DrawRes } from '@/module/mobileModule'
+import type { DrawInfo } from '@/module/mobileModule'
 
 export const prizeDatabase = defineStore('prize', () => {
     // 1등 수상 내역

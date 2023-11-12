@@ -5,7 +5,7 @@
         <img src="../../../../public/sample.jpeg" class="sample-image" alt="임시용" />
     </div>
     <div class="btn-container">
-        <SubmitButton class="btn-submit" content="당첨결과 더보기" @additional-function="onDetail" />
+        <SubmitButton class="btn-submit" content="당첨내역 더보기" @additional-function="onDetail" />
         <div class="btn-retry" @click="retry">다시하기</div>
     </div>
 </template>
@@ -61,8 +61,6 @@ function contentProvider() {
         default:
             contents = `로또랑은 인연이 아닌가봐요...`
     }
-
-    //contents
 
     const yearGap = new Date().getFullYear() - Number(date.slice(0, 4))
     contents = contents + `<br> ${yearGap}년 전 나는 ${prize}원을 놓쳤어요.`
