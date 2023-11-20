@@ -8,6 +8,7 @@
         <SubmitButton class="btn-submit" content="당첨내역 더보기" @additional-function="onDetail" />
         <div class="btn-retry" @click="retry">다시하기</div>
     </div>
+    <MoneyRain />
 </template>
 <script setup lang="ts">
 import { onBeforeMount } from 'vue'
@@ -19,6 +20,7 @@ import { cardDatabase } from '@/store/CardStore'
 import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
 import { getDrawList } from '@/module/mobileModule'
 
+import MoneyRain from '@hybrid/lottery/MoneyRain.vue'
 const prizeStore = prizeDatabase()
 const cardStore = cardDatabase()
 
@@ -78,7 +80,9 @@ function retry() {
 </script>
 <style lang="scss">
 .rp-container {
+    overflow: hidden;
     margin: 64px 32px;
+    height: 100vh;
     text-align: center;
     .rp {
         &-title {

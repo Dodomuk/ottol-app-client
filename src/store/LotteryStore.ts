@@ -11,6 +11,7 @@ export const prizeDatabase = defineStore('prize', () => {
         myPrizeInfo.value = param as DrawInfo
     }
 
+    //
     //당첨 목록
     const prizeInfoList = ref([] as DrawInfo[])
     const getPrizeInfoList = computed(() => prizeInfoList.value)
