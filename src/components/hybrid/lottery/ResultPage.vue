@@ -3,26 +3,25 @@
         <div class="rp-title" v-html="title" />
         <div class="rp-contents" v-html="contents" />
         <img src="../../../../public/sample.jpeg" class="sample-image" alt="임시용" />
+        <MoneyRain />
     </div>
     <div class="btn-container">
         <SubmitButton class="btn-submit" content="당첨내역 더보기" @additional-function="onDetail" />
         <div class="btn-retry" @click="retry">다시하기</div>
     </div>
-    <MoneyRain />
 </template>
 <script setup lang="ts">
 import { onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { prizeDatabase } from '@/store/LotteryStore'
-import { cardDatabase } from '@/store/CardStore'
 
 import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
-import { getDrawList } from '@/module/mobileModule'
-
 import MoneyRain from '@hybrid/lottery/MoneyRain.vue'
-const prizeStore = prizeDatabase()
+import { cardDatabase } from '@/store/CardStore'
+
 const cardStore = cardDatabase()
+const prizeStore = prizeDatabase()
 
 const router = useRouter()
 
@@ -69,8 +68,7 @@ function contentProvider() {
 }
 
 async function onDetail() {
-    const res = await getDrawList(cardStore.getSelectedNumberParam)
-    prizeStore.setPrizeInfoList(res.result)
+    cardStore.pageInfoInitialize()
     router.push({ name: 'resultDetailPage' })
 }
 

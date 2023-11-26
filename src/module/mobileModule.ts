@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 export interface Meta {
     year: number
     age: number
@@ -9,6 +10,11 @@ export interface Meta {
     pageCount: number
     hasNext: boolean
     hasPrev: boolean
+}
+
+export interface PageInfo {
+    page?: number // default 1
+    size?: number // default 5
 }
 
 export interface DrawReq {
@@ -39,15 +45,13 @@ export interface DrawInfo {
     drw_no_date: string
 }
 
-export interface DrawListReq {
+export interface DrawListReq extends PageInfo {
     drwtNo1: number
     drwtNo2: number
     drwtNo3: number
     drwtNo4: number
     drwtNo5: number
     drwtNo6: number
-    page?: number // default 1
-    size?: number // default 5
     order?: string // default desc(내림차순) "'DESC' 'ASC' 중 택 1"
 }
 
