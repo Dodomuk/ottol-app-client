@@ -1,3 +1,5 @@
+import { useLoading, type ActiveLoader } from 'vue-loading-overlay'
+
 export function getDateByFullString(inputDate?: Date) {
     const date = inputDate ? inputDate : new Date()
     return (
@@ -24,4 +26,23 @@ export function dateDecorator(str: string, symbol = '') {
         .split(/[:/]/g)
         .map((v) => (v + '').trim().padStart(2, '0'))
         .join(symbol ? ' ' + symbol + ' ' : '')
+}
+
+const $loading = useLoading({})
+let loader: ActiveLoader
+
+export function loadingStart() {
+    loader = $loading.show({
+        color: '#f44336',
+        loader: 'spinner',
+        width: 96,
+        height: 96,
+        backgroundColor: '#ffffff',
+        opacity: 0.5,
+        zIndex: 1065
+    })
+}
+
+export function loadingHide() {
+    loader?.hide()
 }

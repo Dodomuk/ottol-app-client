@@ -33,7 +33,7 @@
 import { onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
-import { getDateByFullString } from '@common/utils'
+import { getDateByFullString, loadingStart, loadingHide } from '@common/utils'
 
 import { getDrawInfoByYear } from '@/module/mobileModule'
 
@@ -93,7 +93,12 @@ async function goNext() {
         cancelButtonText: '돌아가기',
         inputValidator: async (res) => {
             if (res) {
+                loadingStart()
+
                 const result = await getDrawInfoByYear(cardStore.getSelectedNumberParam, Number(res))
+
+                loadingHide()
+
                 prizeStore.setMyPrizeInfo(result.result)
 
                 router.push({ name: 'resultpage' })

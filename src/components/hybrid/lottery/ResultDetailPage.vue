@@ -31,7 +31,6 @@
             </div>
             <MoreDetail v-if="hasMore" @click="moreDetail" />
         </div>
-        <div v-else class="animate-spin"></div>
     </div>
 </template>
 <script setup lang="ts">
@@ -43,6 +42,8 @@ import { prizeDatabase } from '@/store/LotteryStore'
 import { getDrawList } from '@/module/mobileModule'
 
 import MoreDetail from '@hybrid/MoreDetail.vue'
+
+import { loadingStart, loadingHide } from '@common/utils'
 
 const scrollBox = ref(null)
 
@@ -61,22 +62,31 @@ let prizeList = ref(prizeStore.getPrizeInfoList)
 pageInit()
 
 async function pageInit() {
+    loadingStart()
+
     const res = await getDrawList({ ...cardStore.getSelectedNumberParam, page: 1, size: 20 })
+
+    loadingHide()
+
     hasMore.value = res.meta.hasNext
     prizeStore.setPrizeInfoList(res.result)
     prizeList.value = prizeStore.getPrizeInfoList
+
     isHeightExtend()
+
     pageShow.value = true
 }
 
 async function moreDetail() {
     const page = (cardStore.getPageInfo?.page ?? 0) + 1
     const res = await getDrawList({ ...cardStore.getSelectedNumberParam, page, size: 20 })
+
     hasMore.value = res.meta.hasNext
     prizeStore.setPrizeInfoList([...prizeStore.getPrizeInfoList, ...res.result])
     cardStore.setPageInfo({ page, size: 20 })
     prizeList.value = prizeStore.getPrizeInfoList
     computedKey = getPrizeInfoList.length
+
     isHeightExtend()
 }
 
