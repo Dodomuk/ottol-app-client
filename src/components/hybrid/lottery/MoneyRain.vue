@@ -38,10 +38,10 @@ function pageInit() {
 
 function initAnimation() {
     const numMoney = 300
-    const speedOffset = 10
+    const speedOffset = 30
     const speedRange = 5
     const frameRate = 1000 / 30 // 30 frames per second
-    const animationLength = 10000 // 10 seconds
+    const animationLength = 2000 // 10 seconds
     canvasContext = (document.getElementById('rain') as HTMLCanvasElement).getContext('2d')
     _.range(numMoney).forEach((index) => {
         const isOdd = index % 2 === 1

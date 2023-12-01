@@ -64,8 +64,7 @@ function goNext() {
             }
         }
 
-        .btn:hover .dot,
-        .btn:focus .dot {
+        .btn .dot {
             animation: submitBtn 2s infinite linear;
             display: block;
         }

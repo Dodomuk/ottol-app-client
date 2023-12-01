@@ -20,7 +20,7 @@
                 <div class="list-price text-lg font-semibold">날짜</div>
             </div>
         </div>
-        <div v-if="pageShow" :class="['list-cover', boxRefClass]" :key="computedKey" ref="scrollBox">
+        <div v-if="pageShow" :class="['list-cover pb-1', boxRefClass]" :key="computedKey" ref="scrollBox">
             <div v-for="(data, index) in prizeList" :key="index" class="list-container mb-1">
                 <div class="list-rank">{{ data.win_rank }}</div>
                 <div class="box-wrapper">
