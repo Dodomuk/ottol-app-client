@@ -68,6 +68,7 @@ export async function getDrawInfoByYear(param: DrawReq, year: number) {
     let result = {} as DrawRes
     await axios
         .get(`/api/v1/lotto/find/${year}`, {
+            headers: { 'Content-Type': `application/json` },
             params: param
         })
         .then((res) => {
@@ -85,6 +86,7 @@ export async function getDrawList(param: DrawListReq) {
     let result = {} as DrawListRes
     await axios
         .get('/api/v1/lotto/find', {
+            headers: { 'Content-Type': `application/json` },
             params: param
         })
         .then((res) => {
