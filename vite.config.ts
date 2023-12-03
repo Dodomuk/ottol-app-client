@@ -23,7 +23,7 @@ export default defineConfig({
     server: {
         proxy: {
             '/api': {
-                target: process.env.VITE_API_HOST, // ottol-server(로컬)
+                target: process.env.VITE_API_HOST, // ottol-server
                 changeOrigin: true, //CORS 방지
                 //api root 해당경로로 재탐색
                 rewrite: (path) => path.replace(/^\/api/, '/api')
