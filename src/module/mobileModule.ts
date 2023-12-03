@@ -68,15 +68,18 @@ export async function getDrawInfoByYear(param: DrawReq, year: number) {
     let result = {} as DrawRes
     await axios
         .get(`/api/v1/lotto/find/${year}`, {
-            headers: { 'Content-Type': `application/json` },
+            headers: {
+                'content-type': 'application/json',
+                Accept: 'application/json'
+            },
             params: param
         })
         .then((res) => {
-            console.log('로또 정보 응답 성공')
+            console.debug('로또 정보 응답 성공')
             result = res.data
         })
         .catch((error) => {
-            console.log('조회된 정보를 찾지 못했습니다.')
+            console.debug('조회된 정보를 찾지 못했습니다.')
             throw error
         })
     return result
@@ -90,11 +93,11 @@ export async function getDrawList(param: DrawListReq) {
             params: param
         })
         .then((res) => {
-            console.log('로또 당첨 목록 응답 성공')
+            console.debug('로또 당첨 목록 응답 성공')
             result = res.data
         })
         .catch((error) => {
-            console.log('조회된 정보를 찾지 못했습니다.')
+            console.debug('조회된 정보를 찾지 못했습니다.')
             throw error
         })
     return result
