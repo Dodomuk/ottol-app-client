@@ -124,7 +124,7 @@ async function goNext() {
     margin: auto;
     padding: 0;
     transition: all 300ms cubic-bezier(0.86, 0, 0.07, 1);
-    top: 100%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%);
     text-align: left;

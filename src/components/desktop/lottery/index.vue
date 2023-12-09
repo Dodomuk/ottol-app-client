@@ -12,7 +12,7 @@
             />
         </div>
     </div>
-    <FullPopup :class="showPopup" @close-popup="onClose" />
+    <FullPopup v-show="showPopup" @close-popup="onClose" />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -27,15 +27,14 @@ import FullPopup from '@hybrid/card/FullPopup.vue'
 
 const sectionList = ['A', 'B', 'C', 'D', 'E']
 const selectedMap = new Map()
-const showPopup = ref('')
+const showPopup = ref(false)
 
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
     if (arr) {
         selectedMap.set(index, arr)
         if (selectedMap.size === sectionList.length) {
-            // Array.from(selectedMap.values()).forEach((numbers, idx) => store.cardInfoList.push(numbers[0]))
-            showPopup.value = 'full-popup'
+            showPopup.value = true
         }
     } else {
         selectedMap.delete(index)
@@ -43,7 +42,7 @@ function setNumberList(index: number, arr?: number[]) {
 }
 
 function onClose() {
-    showPopup.value = ''
+    showPopup.value = false
 }
 </script>
 <style scoped lang="scss">
@@ -54,8 +53,5 @@ function onClose() {
     .lotto-paper {
         display: flex;
     }
-}
-.full-popup {
-    top: 10%;
 }
 </style>
