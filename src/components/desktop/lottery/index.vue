@@ -12,37 +12,31 @@
             />
         </div>
     </div>
-    <FullPopup v-show="showPopup" @close-popup="onClose" />
+    <FullPopup />
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
-
-// import { cardStore, type CardInfo } from '@store/CardStore'
+import { cardModalDatabase } from '@store/CardStore'
 
 import ContentsHead from '@hybrid/lottery/ContentsHead.vue'
 import InputContainer from '@hybrid/lottery/InputContainer.vue'
 import FullPopup from '@hybrid/card/FullPopup.vue'
 
-// const store = cardStore()
-
 const sectionList = ['A', 'B', 'C', 'D', 'E']
 const selectedMap = new Map()
-const showPopup = ref(false)
 
+const cardModalStore = cardModalDatabase()
+
+)
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
     if (arr) {
         selectedMap.set(index, arr)
         if (selectedMap.size === sectionList.length) {
-            showPopup.value = true
+            cardModalStore.showModal()
         }
     } else {
         selectedMap.delete(index)
     }
-}
-
-function onClose() {
-    showPopup.value = false
 }
 </script>
 <style scoped lang="scss">

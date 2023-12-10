@@ -1,51 +1,53 @@
 <template>
-    <div class="modal" ref="target">
-        <div class="container">
-            <div class="header">
-                <div class="title">
-                    <div class="close-btn" @click="onClose"></div>
+    <div v-show="isDisable" class="modal-wrap">
+        <div class="modal" ref="target">
+            <div class="container">
+                <div class="header">
+                    <div class="title">
+                        <div class="close-btn" @click="onClose"></div>
+                    </div>
+                    <div class="maintext text-xl text-center font-bold pb-4">제 0000회</div>
+                    <div class="dates text-lg pl-2 font-semibold">
+                        <div>발 행 일 : {{ today }}</div>
+                        <div>추 첨 일 : {{ drawDay }}</div>
+                    </div>
+                    <div class="subtext text-xs text-gray-800 pl-2">※ 당첨번호는 2002년 12월 이내만 조회 가능합니다.</div>
                 </div>
-                <div class="maintext text-xl text-center font-bold pb-4">제 0000회</div>
-                <div class="dates text-lg pl-2 font-semibold">
-                    <div>발 행 일 : {{ today }}</div>
-                    <div>추 첨 일 : {{ drawDay }}</div>
+                <!-- 새로운 버전 -->
+                <div class="body">
+                    <div class="body-text text-2xl font-normal">
+                        <div class="flex-line whitespace-nowrap">A</div>
+                        <div class="flex-line whitespace-nowrap">자 동</div>
+                        <div class="number-list font-bold whitespace-nowrap">{{ cardStore.getCardInfoText }}</div>
+                    </div>
                 </div>
-                <div class="subtext text-xs text-gray-800 pl-2">※ 당첨번호는 2002년 12월 이내만 조회 가능합니다.</div>
-            </div>
-            <!-- 새로운 버전 -->
-            <div class="body">
-                <div class="body-text text-2xl font-normal">
-                    <div class="flex-line whitespace-nowrap">A</div>
-                    <div class="flex-line whitespace-nowrap">자 동</div>
-                    <div class="number-list font-bold whitespace-nowrap">{{ cardStore.getCardInfoText }}</div>
+                <div class="footer">
+                    <div>금액</div>
+                    <div>₩ 1,000</div>
                 </div>
+                <SubmitButton content="당첨결과 확인" @additional-function="goNext" />
             </div>
-            <div class="footer">
-                <div>금액</div>
-                <div>₩ 1,000</div>
-            </div>
-            <SubmitButton content="당첨결과 확인" @additional-function="goNext" />
+            <div class="line-decorator"></div>
         </div>
-        <div class="line-decorator"></div>
     </div>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
 import { getDateByFullString, loadingStart, loadingHide } from '@common/utils'
 
 import { getDrawInfoByYear } from '@/module/mobileModule'
 
-import { cardDatabase } from '@store/CardStore'
+import { cardDatabase, cardModalDatabase } from '@store/CardStore'
 import { prizeDatabase } from '@store/LotteryStore'
 
 import SubmitButton from '@hybrid/lottery/SubmitButton.vue'
 import Swal from 'sweetalert2'
 
-const emit = defineEmits(['close-popup'])
 const target = ref(null)
 const cardStore = cardDatabase()
+const cardModalStore = cardModalDatabase()
 const prizeStore = prizeDatabase()
 
 const router = useRouter()
@@ -53,6 +55,10 @@ const today = getDateByFullString()
 const drawDay = getDrawDate()
 
 const yearOptions = new Map()
+let isDisable = computed(() => {
+    console.log('computed')
+    return cardModalStore.getModalCondition ?? false
+})
 
 onBeforeMount(() => {
     pageInit()
@@ -69,8 +75,9 @@ function pageInit() {
 
 //모달 창 닫기
 function onClose() {
-    emit('close-popup')
+    cardModalStore.hideModal()
 }
+
 function getDrawDate() {
     const today = new Date()
     const getDay = today.getDay()
@@ -114,6 +121,15 @@ async function goNext() {
 }
 </script>
 <style scoped lang="scss">
+.modal-wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
 .modal {
     position: fixed;
     display: flex;

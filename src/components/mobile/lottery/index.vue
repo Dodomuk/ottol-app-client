@@ -5,7 +5,7 @@
             <InputContainer @set-number="setNumberList" />
         </div>
     </div>
-    <FullPopup :class="showPopup" @close-popup="onClose" />
+    <FullPopup />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -13,22 +13,17 @@ import { ref } from 'vue'
 import ContentsHead from '@hybrid/lottery/ContentsHead.vue'
 import InputContainer from '@hybrid/lottery/InputContainer.vue'
 import FullPopup from '@hybrid/card/FullPopup.vue'
-import { cardDatabase } from '@/store/CardStore'
+import { cardDatabase, cardModalDatabase } from '@/store/CardStore'
 
-const showPopup = ref('')
 const store = cardDatabase()
+const cardModalStore = cardModalDatabase()
 
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
     if (arr) {
         store.setCardInfoList(arr)
-        showPopup.value = 'full-popup'
+        cardModalStore.showModal()
     }
-}
-
-// 팝업 닫기
-function onClose() {
-    showPopup.value = ''
 }
 </script>
 <style scoped lang="scss">

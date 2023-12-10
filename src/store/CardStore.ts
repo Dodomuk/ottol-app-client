@@ -29,3 +29,15 @@ export const cardDatabase = defineStore('card', () => {
     }
     return { getCardInfoText, getSelectedNumberParam, getPageInfo, setCardInfoList, setPageInfo, pageInfoInitialize }
 })
+
+export const cardModalDatabase = defineStore('modal', () => {
+    const modalCondition = ref(false)
+    const getModalCondition = computed(() => modalCondition.value)
+    function showModal() {
+        modalCondition.value = true
+    }
+    function hideModal() {
+        modalCondition.value = false
+    }
+    return { getModalCondition, showModal, hideModal }
+})
