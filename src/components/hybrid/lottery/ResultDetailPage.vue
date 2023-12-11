@@ -96,7 +96,6 @@ function isHeightExtend() {
 </script>
 <style scoped lang="scss">
 .listup-container {
-    position: fixed;
     height: 100vh;
     background-color: var(--main-color);
     padding: 15px 30px;

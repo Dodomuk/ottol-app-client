@@ -2,12 +2,10 @@
     <div class="rp-container">
         <div class="rp-title" v-html="title" />
         <div class="rp-contents" v-html="contents" />
-        <img src="../../../../public/sample.jpeg" class="sample-image" alt="임시용" />
-        <MoneyRain />
-    </div>
-    <div class="btn-container">
+        <img src="../../../../public/sample.jpeg" class="sample-image mb-32" alt="임시용" />
         <SubmitButton class="btn-submit" content="당첨내역 더보기" @additional-function="onDetail" />
         <div class="btn-retry" @click="retry">다시하기</div>
+        <MoneyRain />
     </div>
 </template>
 <script setup lang="ts">
@@ -78,9 +76,10 @@ function retry() {
 </script>
 <style lang="scss">
 .rp-container {
-    overflow: hidden;
     margin: 64px 32px;
     height: 100vh;
+    overflow: hidden;
+    touch-action: none;
     text-align: center;
     .rp {
         &-title {
@@ -95,20 +94,13 @@ function retry() {
         }
     }
 }
-.btn-container {
-    position: fixed;
-    bottom: 5px;
-    left: 50%;
-    transform: translate(-50%, -50%);
 
-    .btn {
-        &-submit {
-            margin-bottom: 8px !important;
-        }
-        &-retry {
-            text-align: center;
-            text-decoration: underline;
-        }
+.btn {
+    &-submit {
+        margin-bottom: 8px !important;
+    }
+    &-retry {
+        text-decoration: underline;
     }
 }
 </style>

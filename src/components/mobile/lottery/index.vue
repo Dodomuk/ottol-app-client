@@ -8,8 +8,6 @@
     <FullPopup />
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import ContentsHead from '@hybrid/lottery/ContentsHead.vue'
 import InputContainer from '@hybrid/lottery/InputContainer.vue'
 import FullPopup from '@hybrid/card/FullPopup.vue'
