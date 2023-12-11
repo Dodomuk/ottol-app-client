@@ -133,7 +133,6 @@ function isHeightExtend() {
         }
     }
     .list-main {
-        margin-top: 16px;
         background-color: rgba(255, 255, 255, 0.8);
         display: grid;
         grid-template-columns: 20% 80%;

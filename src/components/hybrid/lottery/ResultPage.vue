@@ -77,9 +77,6 @@ function retry() {
 <style lang="scss">
 .rp-container {
     margin: 64px 32px;
-    height: 100vh;
-    overflow: hidden;
-    touch-action: none;
     text-align: center;
     .rp {
         &-title {
