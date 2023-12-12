@@ -15,6 +15,10 @@ interface Money {
     direction: number
 }
 
+const props = defineProps({
+    prize: { type: String, required: true }
+})
+
 let width = 0
 let height = 0
 let imageHeight = 100
@@ -37,7 +41,8 @@ function pageInit() {
 }
 
 function initAnimation() {
-    const numMoney = 300
+    const moneyInNumber = Number(props.prize ?? 0)
+    const numMoney = moneyInNumber > 3000000 ? 300 : Number(props.prize ?? 0) / 10000 // 최대 300장 제한
     const speedOffset = 30
     const speedRange = 5
     const frameRate = 1000 / 30 // 30 frames per second
@@ -106,8 +111,8 @@ function endAnimation() {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: fit-content;
-    z-index: 999;
+    height: 100vh;
+    z-index: 2000;
 }
 
 .rain {
