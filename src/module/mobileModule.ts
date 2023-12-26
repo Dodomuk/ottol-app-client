@@ -65,7 +65,6 @@ export interface DrawListRes {
     19세 이상 -> 성인이 된 년도를 기눈 가장 큰 결과 1
 */
 export async function getDrawInfoByYear(param: DrawReq, year: number) {
-    console.log('env', import.meta.env)
     let result = {} as DrawRes
     await axios
         .get(`/api/v1/lotto/find/${year}`, {
