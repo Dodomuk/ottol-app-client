@@ -120,7 +120,7 @@ async function goNext() {
     })
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .modal-wrap {
     position: fixed;
     left: 0;
@@ -149,6 +149,7 @@ async function goNext() {
         drop-shadow(0 -3px 4px rgba(0, 0, 0, 0.1));
 
     .container {
+        width: 98%;
         > .header {
             font: 300 24px Lato;
             position: relative;
@@ -211,9 +212,10 @@ async function goNext() {
                 }
             }
             .body-text {
-                width: 100%;
+                width: 95%;
                 display: flex;
                 justify-content: space-between;
+                margin-right: 15px;
                 > .flex-line {
                     letter-spacing: 10px;
                 }
@@ -239,7 +241,7 @@ async function goNext() {
         }
     }
     .line-decorator {
-        width: 5%;
+        width: 2%;
         background-color: #ff69b4;
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;

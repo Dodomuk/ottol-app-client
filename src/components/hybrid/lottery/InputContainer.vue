@@ -176,7 +176,6 @@ function onSubmit() {
         &::after {
             right: -2px;
         }
-
         .checkbox {
             margin: 0;
             position: absolute;
@@ -184,6 +183,10 @@ function onSubmit() {
             left: 50%;
             transform: translate(-50%, -50%);
         }
+    }
+    // 선택완료 , 초기화 클릭시
+    .checkbox-wrapper:hover {
+        background-color: black !important;
     }
 }
 </style>

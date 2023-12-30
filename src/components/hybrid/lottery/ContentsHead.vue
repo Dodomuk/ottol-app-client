@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div class="title-container mb-4">
         <div class="title">Ottol</div>
         <div class="subdiscription">※ 본 화면은 로또 번호 선택용입니다.</div>
@@ -6,7 +6,7 @@
     </div>
 </template>
 <script setup lang="ts"></script>
-<style lang="scss">
+<style lang="scss" scoped>
 .title-container {
     background-color: var(--main-color);
     display: flex;
