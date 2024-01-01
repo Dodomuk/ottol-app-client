@@ -9,11 +9,16 @@
             추첨번호를 입력하고 당첨 여부를 확인해보세요!
         </div>
     </div>
-    <div class="main-button">당첨내역들 확인하러 가기</div>
-    <!-- <LottoPaper /> -->
+    <div class="main-button" @click="goNext">당첨내역들 확인하러 가기</div>
 </template>
 <script setup lang="ts">
-// import LottoPaper from '@mobile/lottery/index.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function goNext() {
+    router.push({ name: 'lotterypage' })
+}
 </script>
 <style scoped lang="scss">
 .main- {
