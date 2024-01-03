@@ -9,7 +9,7 @@
             추첨번호를 입력하고 당첨 여부를 확인해보세요!
         </div>
     </div>
-    <div class="main-button" @click="goNext">당첨내역들 확인하러 가기</div>
+<div class="main-button" @click="goNext">당첨 확인하러 가기</div>
 </template>
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
