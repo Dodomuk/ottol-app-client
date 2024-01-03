@@ -9,7 +9,8 @@
             추첨번호를 입력하고 당첨 여부를 확인해보세요!
         </div>
     </div>
-<div class="main-button" @click="goNext">당첨 확인하러 가기</div>
+    <div class="main-button" @click="goNext">당첨 확인하러 가기</div>
+    <div class="test-button mt-4" @click="goTest">테스트 페이지 가기</div>
 </template>
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
@@ -18,6 +19,10 @@ const router = useRouter()
 
 function goNext() {
     router.push({ name: 'lotterypage' })
+}
+
+function goTest() {
+    router.push({ name: 'testpage' })
 }
 </script>
 <style scoped lang="scss">
@@ -67,5 +72,19 @@ function goNext() {
         font-weight: 500;
         border-radius: 10px;
     }
+}
+
+.test-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: teal;
+    width: 90vw;
+    height: 15vw;
+    margin: 12px auto;
+    font-size: larger;
+    font-weight: 500;
+    border-radius: 10px;
 }
 </style>

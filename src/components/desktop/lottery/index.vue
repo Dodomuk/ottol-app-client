@@ -26,7 +26,6 @@ const selectedMap = new Map()
 
 const cardModalStore = cardModalDatabase()
 
-)
 // 번호 목록이 담긴 리스트
 function setNumberList(index: number, arr?: number[]) {
     if (arr) {
