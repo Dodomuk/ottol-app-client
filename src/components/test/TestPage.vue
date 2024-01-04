@@ -6,8 +6,15 @@
 </template>
 <script setup lang="ts">
 import gsap from 'gsap'
+import { onMounted } from 'vue'
 
-gsap.to('.test-circle', { rotation: 360, x: 100, duration: 1 })
+onMounted(() => {
+    animation()
+})
+
+function animation() {
+    gsap.to('.test-circle', { rotation: 360, x: 100, duration: 1 })
+}
 </script>
 <style scoped lang="scss">
 body {
