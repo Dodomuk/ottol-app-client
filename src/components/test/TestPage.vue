@@ -4,7 +4,7 @@
         <div class="test-circle">테스트</div>
     </body>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import gsap from 'gsap'
 
 gsap.to('.test-circle', { rotation: 360, x: 100, duration: 1 })
