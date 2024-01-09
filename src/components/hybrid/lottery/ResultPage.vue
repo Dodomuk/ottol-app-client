@@ -2,7 +2,9 @@
     <div class="rp-container">
         <div class="rp-title" v-html="title" />
         <div class="rp-contents" v-html="contents" />
-        <img src="../../../../public/sample.jpeg" class="sample-image mb-16" alt="임시용" />
+        <div class="img-wrapper">
+            <img src="../../../../public/character/grandma.png" class="sample-image mb-16" alt="임시용" />
+        </div>
         <SubmitButton class="btn-submit" content="당첨내역 더보기" @additional-function="onDetail" />
         <div class="btn-retry" @click="retry">다시하기</div>
     </div>
@@ -99,6 +101,13 @@ function retry() {
     }
     &-retry {
         text-decoration: underline;
+    }
+}
+.img-wrapper {
+    display: flex;
+    justify-content: center;
+    .sample-image {
+        max-width: 40%;
     }
 }
 </style>
