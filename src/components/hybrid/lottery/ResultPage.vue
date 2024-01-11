@@ -3,7 +3,7 @@
         <div class="rp-title" v-html="title" />
         <div class="rp-contents" v-html="contents" />
         <div class="img-wrapper">
-            <img src="@assets/character/grandma.png" class="sample-image mb-16" alt="임시용" />
+            <img :src="getImage()" class="sample-image mb-16" alt="이미지입니다" />
         </div>
         <SubmitButton class="btn-submit" content="당첨내역 더보기" @additional-function="onDetail" />
         <div class="btn-retry" @click="retry">다시하기</div>
@@ -30,10 +30,9 @@ const rankDetail = prizeStore.getMyPrizeInfo
 const rank = rankDetail.win_rank
 const prize = rankDetail.win_pay
 const date = rankDetail.drw_no_date
-
+const yearGap = new Date().getFullYear() - Number(date.slice(0, 4))
 let title = ''
 let contents = ''
-let img = ''
 
 onBeforeMount(() => {
     pageInit()
@@ -64,8 +63,18 @@ function contentProvider() {
             contents = `로또랑은 인연이 아닌가봐요...`
     }
 
-    const yearGap = new Date().getFullYear() - Number(date.slice(0, 4))
     contents = contents + `<br> ${yearGap}년 전 나는 ${prize}원을 놓쳤어요.`
+}
+
+function getImage() {
+    let img = ''
+    if (yearGap < 5) img = 'child'
+    else if (yearGap < 10) img = 'young_woman'
+    else if (yearGap < 15) img = 'middle_aged_man'
+    else img = 'grandma'
+
+    //vite식 동적 이미지 할당
+    return new URL(`/src/assets/character/${img}.png`, import.meta.url).href
 }
 
 async function onDetail() {
