@@ -56,7 +56,6 @@ const drawDay = getDrawDate()
 
 const yearOptions = new Map()
 let isDisable = computed(() => {
-    console.log('computed')
     return cardModalStore.getModalCondition ?? false
 })
 

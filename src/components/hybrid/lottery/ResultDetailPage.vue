@@ -3,11 +3,11 @@
         <div class="header mt-8 mb-6">당첨 상세 내역</div>
         <div class="tips">
             <div class="tip">
-                <img src="../../../../public/book.png" class="sample-image" alt="책" />
+                <img src="@assets/book.png" class="sample-image" alt="책" />
                 <div class="text">로또는 2002년 12월 2일부터 시작되었다.</div>
             </div>
             <div class="tip">
-                <img src="../../../../public/lighthouse.png" class="sample-image" alt="전구" />
+                <img src="@assets/lighthouse.png" class="sample-image" alt="전구" />
                 <div class="text">로또 구매는 20살이 되는 해 1월 1일부터 구매가 가능하며, 당첨금 수령은 만으로 19세부터 수령이 가능하다.</div>
             </div>
         </div>

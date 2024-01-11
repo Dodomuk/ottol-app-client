@@ -3,7 +3,7 @@
         <div class="rp-title" v-html="title" />
         <div class="rp-contents" v-html="contents" />
         <div class="img-wrapper">
-            <img src="../../../../public/character/grandma.png" class="sample-image mb-16" alt="임시용" />
+            <img src="@assets/character/grandma.png" class="sample-image mb-16" alt="임시용" />
         </div>
         <SubmitButton class="btn-submit" content="당첨내역 더보기" @additional-function="onDetail" />
         <div class="btn-retry" @click="retry">다시하기</div>
@@ -33,6 +33,7 @@ const date = rankDetail.drw_no_date
 
 let title = ''
 let contents = ''
+let img = ''
 
 onBeforeMount(() => {
     pageInit()
