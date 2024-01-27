@@ -1,6 +1,14 @@
 <template>
-    <div class="main-container mt-28 mb-4">
+    <div class="main-container mt-20 mb-4">
         <div class="title">Ottol</div>
+    </div>
+    <div>
+        <div class="img-wrapper">
+            <img :src="getImage('child')" class="sample-image mb-16" alt="이미지입니다" />
+            <img :src="getImage('young_woman')" class="sample-image mb-16" alt="이미지입니다" />
+            <img :src="getImage('middle_aged_man')" class="sample-image mb-16" alt="이미지입니다" />
+            <img :src="getImage('grandma')" class="sample-image mb-16" alt="이미지입니다" />
+        </div>
     </div>
     <div class="main-description">
         <div class="title">과거 로또 당첨 내역을 알려주는 오톨</div>
@@ -23,6 +31,10 @@ function goNext() {
 
 function goTest() {
     router.push({ name: 'testpage' })
+}
+
+function getImage(imgStr: string) {
+    return new URL(`/src/assets/character/${imgStr}.png`, import.meta.url).href
 }
 </script>
 <style scoped lang="scss">
@@ -86,5 +98,9 @@ function goTest() {
     font-size: larger;
     font-weight: 500;
     border-radius: 10px;
+}
+
+.img-wrapper {
+    height: 30vh;
 }
 </style>
