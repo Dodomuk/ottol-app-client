@@ -2,15 +2,15 @@
     <div class="main-container mt-20 mb-4">
         <div class="title">Ottol</div>
     </div>
-    <div>
-        <div class="img-wrapper">
-            <img :src="getImage('child')" class="sample-image mb-16" alt="이미지입니다" />
-            <img :src="getImage('young_woman')" class="sample-image mb-16" alt="이미지입니다" />
-            <img :src="getImage('middle_aged_man')" class="sample-image mb-16" alt="이미지입니다" />
-            <img :src="getImage('grandma')" class="sample-image mb-16" alt="이미지입니다" />
+    <div class="mb-2">
+        <div class="img-wrapper relative">
+            <img :src="getImage('child')" class="sample-image left-2 mt-5" alt="이미지입니다" />
+            <img :src="getImage('young_woman')" class="sample-image young-woman" alt="이미지입니다" />
+            <img :src="getImage('middle_aged_man')" class="sample-image middle-aged-man right-24" alt="이미지입니다" />
+            <img :src="getImage('grandma')" class="sample-image grandma right-2" alt="이미지입니다" />
         </div>
     </div>
-    <div class="main-description">
+    <div class="main-description mt-7">
         <div class="title">과거 로또 당첨 내역을 알려주는 오톨</div>
         <div class="subtitle">
             오톨은 과거 당첨 이력들을 보여줘요.<br />
@@ -61,6 +61,8 @@ function getImage(imgStr: string) {
     }
     &description {
         text-align: center;
+        position: relative;
+        z-index: 999;
         .title {
             font-size: 20px;
             font-weight: bold;
@@ -102,5 +104,20 @@ function getImage(imgStr: string) {
 
 .img-wrapper {
     height: 30vh;
+    .sample-image {
+        position: absolute;
+        width: 30vw;
+
+        &.young-woman {
+            left: 86px;
+        }
+        &.middle-aged-man {
+            height: 32vh;
+        }
+        &.grandma {
+            margin-top: 34px;
+            height: 28vh;
+        }
+    }
 }
 </style>
